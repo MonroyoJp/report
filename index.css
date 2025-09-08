@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'poppins','Courier New', Courier, monospace;
+}
+
+.mainWrapper{
+    background-color: #ffffff;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+.contentWrapper{
+    background-color: #f8fafb;
+    height: 90%;
+    display: flex;
+    align-self: center;
+    margin: 5%;
+}
+
+/* right content*/
+.right {
+    width: 30%;
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+.left {
+    width: 65%;
+    border-radius: 3%;
+}

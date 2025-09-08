@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard.js + Chess.js</title>
+  <link rel="stylesheet" href="/chessboardjs-1.0.0/css/chessboard-1.0.0.css">
+  <style>
+    /* Circle highlight (no background fill) */
+    .highlight::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #9caed3;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* allow dragging pieces */
+    }
+
+    /* Light squares */
+    .white-1e1d7 {
+      background-color: #ffffff !important;
+    }
+
+    /* Dark squares with stripes */
+    .black-3c85d {
+      background: repeating-linear-gradient(
+        -45deg,
+        #dfe1e1 0px,
+        #dfe1e1 2px,
+        transparent 2px,
+        transparent 4px
+      ),
+      #ffffff !important;
+    }
+
+    /* Rank/file notation */
+    .notation-322f9 {
+      font-size: 12px;
+      color: #a5a6a6;
+    }
+
+    /* Piece image scaling */
+    .square-55d63 img {
+      width: 80% !important;
+      height: 80% !important;
+      margin: 10% !important; /* keeps them centered */
+    }
+
+    @media (max-width: 600px) {
+      .piece-417db {
+        background-size: 85% !important; /* larger on small screens */
+      }
+    }
+
+    /* Board styling */
+    .board-b72b1 {
+      border: none;
+      border-radius: 5px;
+      box-sizing: content-box;
+    }
+
+    /* Highlight styles */
+    .highlight1-32417 {
+      background: repeating-linear-gradient(
+        -45deg,
+        #98abd0 0px,
+        #98abd0 2px,
+        transparent 2px,
+        transparent 4px
+      ),
+      #ffffff !important;
+    }
+
+    .highlight2-9c5d2 {
+      background: #cadafe !important;
+    }
+
+    .highlight1-32417,
+    .highlight2-9c5d2 {
+      box-shadow: none !important; /* remove yellow glow */
+    }
+
+    /* Board container */
+    #board {
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div id="board"></div>
+
+  <!-- jQuery (required for chessboard.js) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- chessboard.js -->
+  <script src="/chessboardjs-1.0.0/js/chessboard-1.0.0.js"></script>
+
+  <!-- chess.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+  <script>
+    var game = new Chess();
+
+    // Remove highlights
+    function removeHighlights() {
+      $('#board .square-55d63').removeClass('highlight');
+    }
+
+    // Add circle highlight
+    function highlightSquare(square) {
+      $('#board .square-' + square).addClass('highlight');
+    }
+
+    function onDragStart(source, piece, position, orientation) {
+      if (game.game_over()) return false;
+
+      // Block dragging opponent pieces
+      if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+          (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        return false;
+      }
+
+      var moves = game.moves({ square: source, verbose: true });
+      if (moves.length === 0) return;
+
+      removeHighlights();
+      for (var i = 0; i < moves.length; i++) {
+        highlightSquare(moves[i].to);
+      }
+    }
+
+    function onDrop(source, target) {
+      removeHighlights();
+
+      var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+      });
+
+      if (move === null) return 'snapback';
+    }
+
+    function onSnapEnd() {
+      board.position(game.fen());
+    }
+
+    var board = Chessboard('board', {
+      draggable: true,
+      position: 'start',
+      onDragStart: onDragStart,
+      onDrop: onDrop,
+      onSnapEnd: onSnapEnd
+    });
+  </script>
+</body>
+</html>
