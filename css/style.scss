@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+$ff: 'Dosis', sans-serif;
+$slate: #3F3C3C;
+$blue: #00B4FF;
+
+@function rem($px, $base: 29) {
+  @return #{$px/$base}rem;
+}
+
+* { box-sizing: border-box }
+
+.site-title {
+  position: relative;
+  overflow: hidden;
+  margin-left: rem(-24);
+  z-index: 1;
+  transform: translateZ(0);
+}
+
+.site-title-text {
+  padding: rem(4) rem(6) rem(4) rem(28);
+  color: $slate;
+  font-size: rem(32);
+  font-weight: 800;
+  
+}
+
+$itemSize: 40px;
+
+body {
+    background-color: #222222;
+    color: white;
+    font-family: 'poppins', sans-serif;
+    font-size: 12px;
+}
+
+h2 {
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    z-index: -1;
+}
+
+.center {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.menu {
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+
+}
+
+.title {
+    width: 300px;
+    height: 10px;
+    top: 60px;
+}
+
+.item {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: $itemSize;
+    height: $itemSize;
+    background-color: white;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    line-height: $itemSize;
+}
+
+i {
+    font-size: 0.6 * $itemSize;
+    color: #222222;
+}

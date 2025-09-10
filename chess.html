@@ -1,95 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chessboard.js + Chess.js</title>
+  <title>Energizer</title>
+  <link rel="icon" type="image/png" href="img/online-game.png">
   <link rel="stylesheet" href="/chessboardjs-1.0.0/css/chessboard-1.0.0.css">
+  <link rel="stylesheet" href="css/chess.style.css">
+  <link rel="stylesheet" href="css/style.scss">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+
   <style>
-    /* Circle highlight (no background fill) */
-    .highlight::after {
-      content: "";
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #9caed3;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none; /* allow dragging pieces */
-    }
 
-    /* Light squares */
-    .white-1e1d7 {
-      background-color: #ffffff !important;
-    }
-
-    /* Dark squares with stripes */
-    .black-3c85d {
-      background: repeating-linear-gradient(
-        -45deg,
-        #dfe1e1 0px,
-        #dfe1e1 2px,
-        transparent 2px,
-        transparent 4px
-      ),
-      #ffffff !important;
-    }
-
-    /* Rank/file notation */
-    .notation-322f9 {
-      font-size: 12px;
-      color: #a5a6a6;
-    }
-
-    /* Piece image scaling */
-    .square-55d63 img {
-      width: 80% !important;
-      height: 80% !important;
-      margin: 10% !important; /* keeps them centered */
-    }
-
-    @media (max-width: 600px) {
-      .piece-417db {
-        background-size: 85% !important; /* larger on small screens */
-      }
-    }
-
-    /* Board styling */
-    .board-b72b1 {
-      border: none;
-      border-radius: 5px;
-      box-sizing: content-box;
-    }
-
-    /* Highlight styles */
-    .highlight1-32417 {
-      background: repeating-linear-gradient(
-        -45deg,
-        #98abd0 0px,
-        #98abd0 2px,
-        transparent 2px,
-        transparent 4px
-      ),
-      #ffffff !important;
-    }
-
-    .highlight2-9c5d2 {
-      background: #cadafe !important;
-    }
-
-    .highlight1-32417,
-    .highlight2-9c5d2 {
-      box-shadow: none !important; /* remove yellow glow */
-    }
-
-    /* Board container */
-    #board {
-      width: 600px;
-    }
   </style>
 </head>
 <body>
-  <div id="board"></div>
+    <div class="container">
+      <div class="right">
+        <canvas id="c"></canvas>
+        <div class="center menu">
+            <div id="myMenu"></div>
+        </div>
+
+        <div class="right_wrapper">
+          <div class="main__puzzle"></div>
+          <div class="moon_below"></div>
+          <div class="moon__reflection"></div>
+          <p class="energizer__title">Chess Puzzle Energizer</p>
+          <p class="energizer__description">Each correct moves unlock a piece of puzzle. Collect all to complete the puzzle and discover what it holds.</p>
+
+          
+        </div>
+        
+      </div>
+      <div class="left">
+        <div class="opponent">
+          <img src="img/coachdavid.png" alt="coachdavid" height="30" style="border-radius: 60%; border: 1px solid #000;"> 
+          <p class="name">Coach David</p>
+          <div class="captured__pieces__opponent"></div>
+          <div class="clock" id="blackClock"><span class="bmins">2: </span><span class="bsecs">59s</span></div>
+        </div>
+        <div id="board"></div>
+
+        <div class="progress-vertical">
+          <div class="progress-fill"></div>
+          <canvas id="progressParticles"></canvas>
+        </div>
+
+
+  
+        <div class="player">
+          <img src="img/horse.png" alt="coachdavid" height="30" style="border-radius: 60%; border: 1px solid #000;"> 
+          <p class="player__name">Player Name</p>
+          <div class="player__captured__piece"></div>
+          <div class="clock" id="whiteClock"><span class="wmins">2: </span><span class="wsecs">59s</span></div>
+        </div>
+
+
+      </div>
+
+    </div>
+ 
+
 
   <!-- jQuery (required for chessboard.js) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -97,63 +70,26 @@
   <!-- chessboard.js -->
   <script src="/chessboardjs-1.0.0/js/chessboard-1.0.0.js"></script>
 
+    <!-- jQuery (already included in your project, keep it) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- jQuery UI (needed for .draggable) -->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+
   <!-- chess.js from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="js/anime.min.js"></script>
+  <script src="js/chess.logic.js"></script>
+  <script src="js/draggable.menu.js"></script>
 
-  <script>
-    var game = new Chess();
 
-    // Remove highlights
-    function removeHighlights() {
-      $('#board .square-55d63').removeClass('highlight');
-    }
+  <audio id="moveSound" src="audio/move-self.mp3"></audio>
+  <audio id="captureSound" src="audio/capture.mp3"></audio>
+  <audio id="checkSound" src="audio/move-check.mp3"></audio>
+  <audio id="mateSound" src="audio/game-end.mp3"></audio>
+  <audio id="incorrectSound" src="audio/incorrect-2-15.mp3"></audio>
 
-    // Add circle highlight
-    function highlightSquare(square) {
-      $('#board .square-' + square).addClass('highlight');
-    }
-
-    function onDragStart(source, piece, position, orientation) {
-      if (game.game_over()) return false;
-
-      // Block dragging opponent pieces
-      if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-          (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-        return false;
-      }
-
-      var moves = game.moves({ square: source, verbose: true });
-      if (moves.length === 0) return;
-
-      removeHighlights();
-      for (var i = 0; i < moves.length; i++) {
-        highlightSquare(moves[i].to);
-      }
-    }
-
-    function onDrop(source, target) {
-      removeHighlights();
-
-      var move = game.move({
-        from: source,
-        to: target,
-        promotion: 'q'
-      });
-
-      if (move === null) return 'snapback';
-    }
-
-    function onSnapEnd() {
-      board.position(game.fen());
-    }
-
-    var board = Chessboard('board', {
-      draggable: true,
-      position: 'start',
-      onDragStart: onDragStart,
-      onDrop: onDrop,
-      onSnapEnd: onSnapEnd
-    });
-  </script>
 </body>
 </html>
