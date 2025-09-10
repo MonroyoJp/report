@@ -5,8 +5,14 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	box-sizing: border-box;
 }
 
+
+
 html {
 	background: #fff;
+}
+
+.hideImg{
+	visibility: hidden;
 }
 
 body {
@@ -15,19 +21,19 @@ body {
 	color: #57585c;
 	color: var(--color-text);
 	background-color: #fff;
-	background-color: var(--color-bg);
+	background-image: linear-gradient(120deg, #0a0f1d, #001f3f);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 /* Color schemes */
-.home {
+.demo-6 {
 	--color-text: #fff;
     --color-bg: #020202;
     --color-link: #fff;
     --color-link-hover: #415bf8;
     --color-stitle: #f1f1f1;
-    --fontsize-stitle: 12vw;
+    --fontsize-stitle: 8vw;
     --color-nav: #fff;
     --color-nav-hover: #415bf8;
 }
@@ -197,6 +203,7 @@ main {
 	white-space: nowrap;
 	text-transform: lowercase;
 	pointer-events: none;
+	color: transparent;
 }
 
 .demo span::before {
@@ -234,7 +241,27 @@ a.demo--current {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+
 }
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  background-blend-mode: overlay;
+  background: url("/img/design3.png") no-repeat center center;
+
+  background-size: cover;
+}
+
+
+#orbCanvas{
+	position: fixed;
+}
+
 
 .slide {
 	position: absolute;
@@ -257,12 +284,11 @@ a.demo--current {
 
 .slide__img {
 	position: absolute;
-	top: -200px;
-	left: -200px;
-	width: calc(100% + 400px);
-	height: calc(100% + 400px);
-	background-size: cover;
-	background-position: 50% 50%;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .slidenav {
@@ -273,7 +299,9 @@ a.demo--current {
 	bottom: 0;
 	text-align: center;
 	padding: 2em;
+	visibility: hidden;
 }
+
 
 .slidenav__item {
 	border: 0;
@@ -290,6 +318,20 @@ a.demo--current {
 	color: var(--color-nav-hover);
 }
 
+/* Default: hide inner content of slide__img */
+.slide__img > * {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* When slide is active, show it */
+.slide--current .slide__img > * {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
 .shape {
 	position: absolute;
 	width: 100%;
@@ -305,8 +347,202 @@ a.demo--current {
 	margin: 0;
 	cursor: default;
 	line-height: 1;
-	color: var(--color-stitle);
+	color: #d7e6e8; /* Neon cyan */
+	font-family: 'Orbitron', sans-serif; /* Futuristic font (Google Fonts) */
+	text-transform: uppercase;
+	text-align: center;
+
+	
+	/* Glow Effect */
+	text-shadow: 
+		0 0 8px #13ebff,
+		0 0 15px #00eaff,
+		0 0 0px #00eaff,
+		0 0 50px #0077ff,
+		0 0 80px #0077ff;
 }
+
+/* Glitch animation */
+   @keyframes glitch {
+      0% { text-shadow: 0 0 5px #13ebff, 0 0 10px #00eaff, 0 0 20px #0077ff; }
+      10% { text-shadow: 2px 0 #13ebff, -2px 0 #00eaff; }
+      20% { text-shadow: -2px 0 #13ebff, 2px 0 #0077ff; }
+      30% { text-shadow: 0 0 5px #13ebff, 0 0 15px #00eaff, 0 0 40px #0077ff; }
+      40% { text-shadow: 2px -2px #00eaff, -2px 2px #13ebff; }
+      50% { text-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff, 0 0 30px #0077ff; }
+      /* hold steady for the rest of the animation (2s pause) */
+      100% { text-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff, 0 0 30px #0077ff; }
+    }
+
+	
+
+nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 20px;
+      background: transparent;
+	  position: fixed;
+	  right: 8%;
+	  top: 6%;
+    }
+
+    nav a {
+      position: relative;
+      text-decoration: none;
+      font-size: 18px;
+      color: #d7e6e8;
+      transition: color 0.3s ease;
+    }
+
+    nav a::before,
+    nav a::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 6px;
+      width: 12px;
+      background: #d7e6e8;
+      opacity: 0;
+      transition: all 0.3s ease;
+      border-radius: 3px;
+    }
+
+    .nav1 a::before {
+      left: -20px;
+      box-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff;
+	  opacity: 0;
+    }
+
+    .nav1 a::after {
+      right: -20px;
+      box-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff;
+	  opacity: 0;
+
+    }
+
+    .nav1 a.active {
+      font-weight: bold;
+      color: #d7e6e8;
+      text-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff, 0 0 30px #0077ff;
+	  font-family: 'Orbitron', sans-serif; /* Futuristic font (Google Fonts) */
+	  animation: glitch 4s infinite;
+    }
+
+    .nav1 a.active::before,
+    .nav1 a.active::after {
+      opacity: 1;
+    }
+
+	.nav1 a:hover {
+      font-weight: bold;
+      color: #d7e6e8;
+	  transition: 0.3s ease;
+      text-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff, 0 0 30px #0077ff;
+	  font-family: 'Orbitron', sans-serif; /* Futuristic font (Google Fonts) */
+	  animation: glitch 4s infinite;
+    }
+
+	.bar {
+  display: inline-block;
+  width: 12px;
+  height: 6px;
+  background: #d7e6e8;
+  border-radius: 3px;
+  opacity: 0;
+  vertical-align: middle;
+}
+
+.bar-left {
+  box-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff;
+}
+
+.bar-right {
+  box-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff;
+}
+
+
+	.glitch-text span {
+    display: inline-block;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  /* flicker colors */
+  .glitch-text span.flicker1 {
+    color: #0ff; /* cyan */
+    text-shadow: 0 0 4px #0ff, 0 0 8px #0ff;
+  }
+
+  .glitch-text span.flicker2 {
+    color: rgb(3, 126, 178); /* magenta */
+    text-shadow: 0 0 4px rgb(0, 119, 255), 0 0 8px rgb(0, 187, 255);
+  }
+
+  .glitch-text span.flicker3 {
+    color: #fff; /* back to normal white */
+    text-shadow: none;
+  }
+    
+
+#logo-text{
+	position: fixed;
+	top: 8%;
+	left: 5%;
+}
+
+.neon__style{
+	font-family: 'Orbitron', sans-serif;
+	text-transform: uppercase;
+	/* Glow Effect */
+	text-shadow: 
+		0 0 8px #13ebff,
+		0 0 15px #00eaff,
+		0 0 0px #00eaff,
+		0 0 50px #0077ff,
+		0 0 80px #0077ff;
+}
+
+
+.glow__effect{
+	/* Glow Effect */
+	text-shadow: 
+		0 0 8px #13ebff,
+		0 0 15px #00eaff,
+		0 0 0px #00eaff,
+		0 0 50px #0077ff,
+		0 0 80px #0077ff;
+}
+
+
+
+@keyframes neonPulse {
+	0%, 100% {
+		text-shadow: 
+			0 0 10px #00eaff,
+			0 0 20px #00eaff,
+			0 0 40px #00eaff,
+			0 0 80px #0077ff,
+			0 0 100px #0077ff;
+	}
+	50% {
+		text-shadow: 
+			0 0 20px #00eaff,
+			0 0 40px #00eaff,
+			0 0 80px #00eaff,
+			0 0 120px #0077ff,
+			0 0 200px #0077ff;
+	}
+}
+
+.slide__title {
+	/* animation: neonPulse 2s infinite; */
+}
+
+.img80percent{
+	transform: scale(0.6) !important;
+}
+
 
 .slide__desc {
 	position: relative;
