@@ -13,12 +13,16 @@ var currentStep1 = 0;
 var checkpoints1 = [game1.fen()];
 var lastMove1 = null;
 
-// ⏱ Chess clock
+// Chess clock
 var whiteSecs1 = 0, blackSecs1 = 0;
 var whiteMins1 = 3, blackMins1 = 3;
 var activeClock1 = "w"; 
 var isPaused1 = false;
 var clockInterval1 = setInterval(updateClock1, 1000);
+
+let matchElapsed1 = 0;   // total active time in ms
+let matchStart1 = Date.now();
+
 
 function updateClock1() {
   if (isPaused1 || game1.game_over()) return;
@@ -66,28 +70,60 @@ function switchClock1() {
 function endGame1(msg) { 
   clearInterval(clockInterval1); 
   console.log(msg); 
+
+  // calculate elapsed time
+  var elapsedMs = Date.now() - matchStart1;
+  var minutes = Math.floor(elapsedMs / 60000);
+  var seconds = Math.floor((elapsedMs % 60000) / 1000);
+  var matchTimeStr = getMatchTime1();
+
+  // pass to modal if checkmate
+  if (msg === "Checkmate!") {
+    showCheckmateModal(playerNameEl.innerHTML, "Coach David", "/img/horse.png", "/img/coachdavid.png", matchTimeStr);
+  }
 }
 
-// 🎯 Toggle pause/resume on clock click
+// Toggle pause/resume on clock click
 document.getElementById("whiteClock").addEventListener("click", togglePause1);
 document.getElementById("blackClock").addEventListener("click", togglePause1);
 
 function togglePause1() {
   isPaused1 = !isPaused1;
+
   if (isPaused1) {
+    // accumulate time before pausing
+    matchElapsed1 += Date.now() - matchStart1;
+
     document.getElementById("whiteClock").classList.remove('active1');
     document.getElementById("blackClock").classList.remove('active1');
+    console.log("⏸️ Paused");
+  } else {
+    // resume tracking
+    matchStart1 = Date.now();
+    console.log("▶️ Resumed");
   }
-  console.log(isPaused1 ? "⏸️ Paused" : "▶️ Resumed");
 }
 
-// 🔊 Sounds
+function getMatchTime1() {
+  let elapsed = matchElapsed1;
+
+  if (!isPaused1) {
+    elapsed += Date.now() - matchStart1;
+  }
+
+  let minutes = Math.floor(elapsed / 60000);
+  let seconds = Math.floor((elapsed % 60000) / 1000);
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+
+// Sounds
 function playSound1(type) {
   let sound = document.getElementById(type + "Sound");
   if (sound) { sound.currentTime = 0; sound.play(); }
 }
 
-// 🌟 Highlight helpers
+//  Highlight helpers
 function clearTempHighlights1() {
   $('#board .square-55d63').removeClass('highlight square-error');
 }
@@ -116,7 +152,7 @@ function applyLastMoveHighlight1() {
   $('#board .square-' + lastMove1.to).addClass("last-move-to");
 }
 
-// ♟ Events
+// Events
 function onDragStart1(source, piece) {
   if (game1.game_over()) return false;
   if (piece.startsWith('b')) return false;
@@ -168,6 +204,7 @@ function onDrop1(source, target) {
     if (currentStep1 === solutionMoves1.length) {
       setTimeout(() => {
         playSound1("mate"); endGame1("Checkmate!");
+        
         var boardObj = game1.board();
         for (var r = 0; r < 8; r++) {
           for (var c = 0; c < 8; c++) {
@@ -219,7 +256,7 @@ $('#board').on('click', '.square-55d63', function() {
 
 
 
-var c1 = document.getElementById("c");
+var c1 = document.getElementById("cParticle");
 var ctx1 = c1.getContext("2d");
 var cH1, cW1;
 var constellationParticles1 = [];
@@ -232,10 +269,10 @@ var currentBg1 = { ...nightColor1 };
 var targetBg1 = { ...nightColor1 };
 var isNight1 = true;
 
-// 🌙/☀️ Puzzle element
+// Puzzle element
 var puzzle1 = document.querySelector(".main__puzzle");
 
-// 🔵 Circle helper
+// Circle helper
 function extend1(a, b){ for(var key in b){ if(b.hasOwnProperty(key)) a[key]=b[key]; } return a; }
 var Circle1 = function(opts){ extend1(this, opts); }
 Circle1.prototype.draw = function() {
@@ -250,7 +287,7 @@ Circle1.prototype.draw = function() {
   ctx1.globalAlpha = 1;
 };
 
-// ✨ Constellation Particles
+//  Constellation Particles
 function ConstellationParticle1() {
   this.x = Math.random() * cW1;
   this.y = Math.random() * cH1;
@@ -265,7 +302,7 @@ ConstellationParticle1.prototype.draw = function() {
   ctx1.fill();
 };
 
-// ⭐ Moving Stars
+//  Moving Stars
 function Star1() {
   this.x = Math.random() * cW1;
   this.y = Math.random() * cH1 * 0.7;
@@ -287,7 +324,7 @@ Star1.prototype.update = function() {
   this.draw();
 };
 
-// ⭐ Draw constellation connections
+//  Draw constellation connections
 function drawConstellation1() {
   for (let i = 0; i < constellationParticles1.length; i++) {
     let p1 = constellationParticles1[i];
@@ -325,26 +362,27 @@ function drawConstellation1() {
   }
 }
 
-// 🎬 Animation loop
-var animateLoop1 = anime({
-  duration: Infinity,
-  update: function() {
-    // Smooth background fade
-    currentBg1.r = lerp1(currentBg1.r, targetBg1.r, 0.01);
-    currentBg1.g = lerp1(currentBg1.g, targetBg1.g, 0.01);
-    currentBg1.b = lerp1(currentBg1.b, targetBg1.b, 0.01);
-    ctx1.fillStyle = `rgb(${Math.round(currentBg1.r)},${Math.round(currentBg1.g)},${Math.round(currentBg1.b)})`;
-    ctx1.fillRect(0, 0, cW1, cH1);
+//  Animation loop (fixed)
+function animateLoop1() {
+  requestAnimationFrame(animateLoop1);
 
-    // Stars always visible
-    stars1.forEach(star1 => star1.update());
+  // Smooth background fade
+  currentBg1.r = lerp1(currentBg1.r, targetBg1.r, 0.01);
+  currentBg1.g = lerp1(currentBg1.g, targetBg1.g, 0.01);
+  currentBg1.b = lerp1(currentBg1.b, targetBg1.b, 0.01);
+  ctx1.fillStyle = `rgb(${Math.round(currentBg1.r)},${Math.round(currentBg1.g)},${Math.round(currentBg1.b)})`;
+  ctx1.fillRect(0, 0, cW1, cH1);
 
-    // Constellations only at night
-    if (isNight1) drawConstellation1();
-  }
-});
+  // Stars always visible
+  stars1.forEach(star1 => star1.update());
 
-// 🖥 Resize
+  // Constellations only at night
+  if (isNight1) drawConstellation1();
+}
+animateLoop1();
+
+
+// Resize
 function resizeCanvas1() {
   cW1 = window.innerWidth * 0.4;
   cH1 = window.innerHeight;
@@ -355,7 +393,7 @@ function resizeCanvas1() {
 }
 window.addEventListener("resize", resizeCanvas1);
 
-// 🚀 Init
+
 (function init1() {
   resizeCanvas1();
   for (let i = 0; i < 80; i++) constellationParticles1.push(new ConstellationParticle1());
@@ -388,7 +426,7 @@ window.addEventListener("resize", resizeCanvas1);
   }, 20000);
 })();
 
-// 🖱️ Events
+
 c1.addEventListener("mousemove", function(e) {
   var rect1 = c1.getBoundingClientRect();
   mouse1.x = e.clientX - rect1.left;
@@ -399,7 +437,7 @@ c1.addEventListener("mouseleave", function() {
   mouse1.y = null;
 });
 
-// 🔧 Helpers
+// Helpers
 function lerp1(a, b, t) {
   return a + (b - a) * t;
 }
@@ -463,6 +501,8 @@ function updateProgressBar1(step1, totalSteps1) {
   const tipY1 = pH1 - (percent1 / 100) * pH1;
   const tipX1 = pW1 / 2;
 
+  let value = getProgress1();
+
   // Burst at checkpoint
   for (let i = 0; i < 15; i++) {
     particles1.push(new Particle1(tipX1, tipY1, "rgba(255,255,255,0.9)", true));
@@ -472,9 +512,273 @@ function updateProgressBar1(step1, totalSteps1) {
 // Gentle sparks at the tip
 setInterval(() => {
   const percent1 = parseFloat(progressFill1.style.height) / 100;
+
   if (percent1 > 0 && percent1 <= 1) {
     const tipY1 = pH1 - (percent1 * pH1);
     const tipX1 = pW1 / 2;
     particles1.push(new Particle1(tipX1, tipY1, "rgba(0,242,254,0.7)", false));
   }
 }, 80);
+
+document.querySelectorAll("#word, #excel").forEach(el => {
+  console.log(el.id, el.getAttribute("opacity"), el.style.opacity, el.getAttribute("visibility"));
+});
+
+
+// Function to get current progress value (0–100%)
+function getProgress1() {
+  const height = parseFloat(progressFill1.style.height) || 0;
+  return height; // already in percentage
+}
+
+function showCheckmateModal(winner, loser, winnerImg, loserImg, time) {
+  const modal = document.getElementById('checkmateModal');
+  document.getElementById('winnerName').textContent = winner;
+  document.getElementById('loserName').textContent = loser;
+  document.getElementById('winnerAvatar').src = winnerImg;
+  document.getElementById('loserAvatar').src = loserImg;
+  document.getElementById('matchTime').textContent = `Match Time: ${time}`;
+
+  modal.style.display = "flex";
+
+  anime({
+    targets: ".checkmate-box",
+    opacity: [0.1, 1],
+    scale: [0.5, 1],
+    easing: "easeOutBack",
+    duration: 800
+  });
+
+  anime({
+    targets: ".checkmate-player",
+    translateY: [40, 0],
+    opacity: [0, 1],
+    delay: anime.stagger(120),
+    duration: 400,
+    easing: "easeOutCubic"
+  });
+}
+
+document.getElementById('checkmateOkBtn').addEventListener('click', () => {
+  anime({
+    targets: ".checkmate-box",
+    opacity: [1, 0],
+    scale: [1, 0.8],
+    easing: "easeInBack",
+    duration: 400,
+    complete: () => {
+      const svgWrap = document.getElementById("svgWrapper");
+      svgWrap.style.display = "block";
+      
+      resetIcons();
+      // Start GSAP animation
+      tl.restart();
+    }
+  });
+});
+
+
+
+
+function hideIcons(icons) {
+  icons.forEach(icon => {
+    if (!icon) return;
+    const originalTransform = icon.getAttribute("transform") || "";
+    icon.dataset.originalTransform = originalTransform;
+
+    icon.setAttribute(
+      "transform",
+      originalTransform.replace(/scale\([^)]*\)/, "") + " scale(0)"
+    );
+    icon.setAttribute("opacity", "0");
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const icons = document.querySelectorAll("#word, #excel, #powerpoint, #chrome, #files, #twitter, #facebook, #whatsapp, #youtube");
+  hideIcons(icons);
+});
+
+function resetIcons() {
+  const icons = document.querySelectorAll("#word, #excel, #powerpoint, #chrome, #files, #twitter, #facebook, #whatsapp, #youtube");
+  hideIcons(icons);
+}
+
+
+
+const tl = gsap.timeline({defaults: {ease: "elastic.out(1, 0.5)"}});
+
+// Step 1: Shadow widen
+tl.fromTo("#monitorShadow", 
+  {scaleX: 0.5, transformOrigin: "center"},
+  {scaleX: 1, duration: 2}
+)
+
+
+
+// Step 2: Frame bounce up + widen
+.to("#monitorFrame", {opacity: 1, y: 0, duration: 0}, "-=0.3")
+.fromTo("#monitorFrame", 
+  {scaleX: 0.1, transformOrigin: "center", y: 200, opacity: 0.5}, 
+  {scaleX: 0.1, y: 0, duration: 1, opacity: 1}, "<"
+)
+
+.to("#monitorFrame", {opacity: 1, y: 0, duration: 0}, "-=0.3")
+.fromTo("#monitorFrame", 
+  {scaleX: 0.1, transformOrigin: "center", y: 20, opacity: 0}, 
+  {scaleX: 1, y: 0, duration: 1, opacity: 1}, "<"
+)
+
+// Step 3: Stand bounce up
+.to("#monitorStandTop", {opacity: 1, y: 20, duration: 0}, "-=0.6")
+.fromTo("#monitorStandTop", 
+  {y: 200, opacity: 0}, 
+  {y: 0, opacity: 1, duration: 0.3}, "<"
+)
+
+.to("#monitorStandBottom", {opacity: 1, y: 40, duration: 0}, "-=0.8")
+.fromTo("#monitorStandBottom", 
+  {y: 400, opacity: 0}, 
+  {y: 0, opacity: 1, duration: 0.8}, "<"
+)
+
+.fromTo("#taskbar", 
+  {y: 10,opacity: 0},
+  {opacity: 1, y: 0, duration: 0.5}
+)
+
+
+// Step 4: Screen "turns on"
+.to("#monitorFrame", {fill: "#fffaf5", duration: 0.3, ease: "power2.inOut"})
+.fromTo('#monitorFrame',
+  {fill: "#262525"},
+  {fill: "#fffaf5", duration: 0.8}
+)
+.to("#monitorScreen", {opacity: 1, duration: 0.8, ease: "power2.out"}, "<")
+
+// Step 5: Animate icons (now hidden first, then scale+fade in)
+
+.add(() => {
+  const icons = document.querySelectorAll(
+    "#word, #excel, #powerpoint, #chrome, #files, #twitter, #facebook, #whatsapp, #youtube"
+  );
+
+  gsap.to(icons, {
+    attr: i => ({ transform: icons[i].dataset.originalTransform }),
+    opacity: 1,
+    duration: 0.5,
+    ease: "back.out(1.7)",
+    stagger: 0.1
+  });
+}, "+=0.1");
+
+// Power-off timeline (paused by default)
+const tlOff = gsap.timeline({
+  paused: true,
+  defaults: { ease: "power2.in" },
+  onComplete: () => {
+    // When shutdown finishes → hide modal with anime
+    anime({
+      targets: ".checkmate-box",
+      opacity: [0, 0],
+      scale: [1, 0.8],
+      easing: "easeInBack",
+      duration: 400,
+      complete: () => {
+        document.getElementById("checkmateModal").style.display = "none";
+      }
+    });
+  }
+});
+
+// Step 1: Icons shrink fast
+tlOff.to("#word, #excel, #powerpoint, #chrome, #files, #twitter, #facebook, #whatsapp, #youtube", {
+  scale: 0,
+  opacity: 0,
+  stagger: 0.05,
+  duration: 0.1
+})
+
+// Step 2: Screen dims quickly
+.to("#monitorScreen", { opacity: 0, duration: 0.3 }, "<")
+.to("#monitorFrame", { fill: "#262525", duration: 0.3 }, "<")
+
+// Step 3: Taskbar vanishes
+.to("#taskbar", { opacity: 0, y: 10, duration: 0.2 }, "-=0.2")
+
+// Step 4: Stand + frame drop fast
+.to("#monitorStandTop", { y: 200, opacity: 0, duration: 0.3 }, "-=0.1")
+.to("#monitorStandBottom", { y: 400, opacity: 0, duration: 0.4 }, "-=0.2")
+.to("#monitorFrame", { y: 200, opacity: 0, duration: 0.4 }, "-=0.3")
+.to("#monitorShadow", { scaleX: 0.5, duration: 0.3 }, "-=0.3");
+
+
+// Power button click: trigger shutdown
+document.getElementById("power_button").onclick = () => {
+  tlOff.restart();
+};
+
+
+function updateClock() {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  
+  // Convert to 12-hour format
+  hours = hours % 12 || 12;
+  
+  document.getElementById("clock").textContent = `${hours}:${minutes} ${ampm}`;
+}
+
+// Initial update
+updateClock();
+
+// Sync to the next exact minute
+const now = new Date();
+const msToNextMinute = (60 - now.getSeconds()) * 1000;
+setTimeout(() => {
+  updateClock();
+  setInterval(updateClock, 60000); 
+}, msToNextMinute);
+
+const playerNameEl = document.getElementById("playerName");
+let playerCount = 0;
+playerNameEl.addEventListener("dblclick", () => {
+  
+  const currentName = playerNameEl.textContent.trim();
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = currentName;
+  input.className = "player__name__input";
+
+  // Replace element content
+  playerNameEl.textContent = "";
+  playerNameEl.appendChild(input);
+  input.focus();
+
+  // Save on Enter or blur
+  function save() {
+    playerNameEl.textContent = capitalizeWords(input.value.trim()) || "Player Name";
+
+  }
+
+  input.addEventListener("blur", save);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      save();
+    playerCount++;
+    console.log(playerNameEl.textContent + " " + playerCount);
+
+    }
+  });
+});
+
+function capitalizeWords(text) {
+  return text
+    .split(" ")                        // split by spaces
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // capitalize
+    .join(" ");                        // join back with spaces
+}
+
+

@@ -26,6 +26,171 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+:root{
+	--accent1:#13ebff;
+    --accent2:#ff3b7a;
+}
+
+.svg__wrapper {
+  position: fixed;
+  bottom: 5%;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  pointer-events: none;
+}
+
+.svg__frame {
+  width: 100%;
+  height: 100%;
+}
+
+#progressCompleteEffect {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(0, -100%) scale(0.5);
+  opacity: 0;
+  background: #2980B9; 
+  color: white;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.6s ease-out;
+  pointer-events: none;
+}
+#progressCompleteEffect.show {
+  transform: translate(-20px, -150%) scale(1);
+  opacity: 1;
+}
+
+.checkmate-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.checkmate-box {
+  background: #fff;
+  border-radius: 12px;
+  width: 420px;
+  max-width: 95%;
+  padding: 20px 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  transform: scale(0.8);
+  opacity: 0;
+}
+.checkmate-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 20px; 
+}
+
+.checkmate-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vs-text {
+  font-weight: 600;
+  color: #999;
+  font-size: 14px;
+}
+
+.player-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+.player-name {
+  font-weight: 600;
+  color: #222;
+}
+.player-status {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.winner-status {
+  color: #2e8b57;
+}
+.loser-status {
+  color: #c0392b;
+}
+.vs-text {
+  font-weight: 600;
+  color: #999;
+  font-size: 14px;
+}
+.checkmate-body {
+  text-align: center;
+  margin: 15px 0;
+}
+.checkmate-body h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+}
+.checkmate-body p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+.checkmate-footer {
+  text-align: center;
+  margin-top: 10px;
+}
+#checkmateOkBtn {
+  background: #5166fa;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#checkmateOkBtn:hover {
+  background: #3f51d1;
+}
+
+#svgWrapper{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	transform: translateX(-17%);
+}
+#puzzle_next_part{
+	position: relative;
+	 width: 100%;
+    height: 100%;
+}
+
+.player__name__input {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 2px 6px;
+  width: 90%;
+}
+  
 /* Color schemes */
 .demo-6 {
 	--color-text: #fff;
@@ -36,6 +201,7 @@ body {
     --fontsize-stitle: 8vw;
     --color-nav: #fff;
     --color-nav-hover: #415bf8;
+	--fontsize-title: 3em;
 }
 
 /* Fade effect */
@@ -241,7 +407,7 @@ a.demo--current {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-
+	
 }
 #particleCanvas {
   position: fixed;
@@ -250,18 +416,65 @@ a.demo--current {
   width: 100%;
   height: 100%;
   display: block;
-
-  background-blend-mode: overlay;
-  background: url("/img/design3.png") no-repeat center center;
-
-  background-size: cover;
 }
 
+.quote{
+	position: absolute;
+	bottom: 25%;
+	left: 10%;
+}
+
+.start-text{
+	position: absolute;
+	bottom: 27%;
+	right: 10%;
+	color: #d7e6e8; /* Neon cyan */
+	font-family: 'Orbitron', sans-serif;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
+span.icon-start img{
+	height: 20px;
+	width: 20px;
+}
 
 #orbCanvas{
 	position: fixed;
 }
 
+.uppercase{
+	text-transform: uppercase;
+}
+
+.slide__content{
+	padding: 20px 30px;
+}
+
+.slide__content img{
+	height: 100%;
+	width: 100%;
+}
+.discussion__title{
+	font-size: 48px;
+  font-weight: bold;
+  color: #d7e6e8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif; 
+  margin-bottom: 50px;
+  width: 55%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.divided2__left{
+	width: 50%;
+}
+
+.discussion__divided2{
+	display: flex;
+	gap: 75px;
+}
 
 .slide {
 	position: absolute;
@@ -300,6 +513,7 @@ a.demo--current {
 	text-align: center;
 	padding: 2em;
 	visibility: hidden;
+	pointer-events: none;
 }
 
 
@@ -318,14 +532,14 @@ a.demo--current {
 	color: var(--color-nav-hover);
 }
 
-/* Default: hide inner content of slide__img */
+
 .slide__img > * {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
 
-/* When slide is active, show it */
+
 .slide--current .slide__img > * {
   opacity: 1;
   pointer-events: auto;
@@ -352,15 +566,21 @@ a.demo--current {
 	text-transform: uppercase;
 	text-align: center;
 
-	
-	/* Glow Effect */
-	text-shadow: 
-		0 0 8px #13ebff,
-		0 0 15px #00eaff,
-		0 0 0px #00eaff,
-		0 0 50px #0077ff,
-		0 0 80px #0077ff;
 }
+
+.text_title {
+	position: relative;
+	font-size: var(--fontsize-title) !important;
+	margin: 0;
+	cursor: default;
+	line-height: 1;
+	color: #d7e6e8; /* Neon cyan */
+	font-family: 'Orbitron', sans-serif; /* Futuristic font (Google Fonts) */
+	text-transform: uppercase;
+	text-align: center;
+
+}
+
 
 /* Glitch animation */
    @keyframes glitch {
@@ -373,6 +593,76 @@ a.demo--current {
       /* hold steady for the rest of the animation (2s pause) */
       100% { text-shadow: 0 0 8px #13ebff, 0 0 15px #00eaff, 0 0 30px #0077ff; }
     }
+
+
+	/* Base glitch style for slide titles */
+.slide__title.glitch-text {
+  position: relative;
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  color: #d7e6e8;
+  letter-spacing: -0.02em;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide__title.glitch-text::before,
+.slide__title.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events: none;
+  opacity: .85;
+}
+
+.slide__title.glitch-text::before {
+  color: #13ebff;
+  transform: translate(-4px,-2px) skewX(-4deg);
+  mix-blend-mode: screen;
+  filter: blur(.6px);
+  animation: glitch-slide-1 2.6s infinite linear alternate-reverse;
+}
+
+.slide__title.glitch-text::after {
+  color: #ff3b7a;
+  transform: translate(4px,2px) skewX(3deg);
+  mix-blend-mode: screen;
+  filter: url(#turb) blur(.3px);
+  animation: glitch-slide-2 3.2s infinite linear alternate-reverse;
+}
+
+/* Idle subtle drift */
+@keyframes glitch-slide-1 {
+  0%{ transform: translate(-4px,-2px) skewX(-4deg) }
+  50%{ transform: translate(-1px,2px) skewX(-1deg) }
+  100%{ transform: translate(-6px,-3px) skewX(-5deg) }
+}
+@keyframes glitch-slide-2 {
+  0%{ transform: translate(4px,2px) skewX(3deg) }
+  50%{ transform: translate(1px,-2px) skewX(1deg) }
+  100%{ transform: translate(6px,3px) skewX(5deg) }
+}
+
+/* Blocky burst glitch */
+@keyframes glitch-blocky {
+  0% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  20% { clip-path: inset(0 0 85% 0); transform: translateX(-20px); }
+  40% { clip-path: inset(20% 0 60% 0); transform: translateX(20px); }
+  60% { clip-path: inset(40% 0 40% 0); transform: translateX(-15px); }
+  80% { clip-path: inset(65% 0 20% 0); transform: translateX(15px); }
+  100% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+}
+
+.slide__title.glitch-active::before {
+  animation: glitch-blocky .25s steps(2) infinite;
+  transform: translateX(-12px) skewX(-8deg);
+}
+.slide__title.glitch-active::after {
+  animation: glitch-blocky .25s steps(2) infinite reverse;
+  transform: translateX(12px) skewX(8deg);
+}
 
 	
 
@@ -444,6 +734,10 @@ nav {
 	  font-family: 'Orbitron', sans-serif; /* Futuristic font (Google Fonts) */
 	  animation: glitch 4s infinite;
     }
+
+	.glitch__class{
+		animation: glitch 4s infinite;
+	}
 
 	.bar {
   display: inline-block;
@@ -535,9 +829,6 @@ nav {
 	}
 }
 
-.slide__title {
-	/* animation: neonPulse 2s infinite; */
-}
 
 .img80percent{
 	transform: scale(0.6) !important;
@@ -569,6 +860,7 @@ nav {
 	color: var(--color-slink-hover);
 	background: var(--color-slink-hover-bg);
 }
+
 
 @media screen and (min-width: 55em) {
 	.demos {

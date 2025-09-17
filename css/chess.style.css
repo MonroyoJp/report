@@ -18,22 +18,22 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      pointer-events: none; /* allow dragging pieces */
+      pointer-events: none;
     }
 
     .last-move-from {
-      background-color: #5475b5 !important; /* orange */
+      background-color: #5475b5 !important; 
     }
     .last-move-to {
-      background-color: #334b7f !important;   /* green */
+      background-color: #334b7f !important;   
     }
 
-    /* Light squares */
+    
     .white-1e1d7 {
       background-color: #ffffff !important;
     }
 
-    /* Dark squares with stripes */
+    
     .black-3c85d {
       background: repeating-linear-gradient(
         -45deg,
@@ -55,12 +55,12 @@
     .square-55d63 img {
       width: 80% !important;
       height: 80% !important;
-      margin: 10% !important; /* keeps them centered */
+      margin: 10% !important; 
     }
 
     @media (max-width: 600px) {
       .piece-417db {
-        background-size: 85% !important; /* larger on small screens */
+        background-size: 85% !important; 
       }
     }
 
@@ -89,7 +89,7 @@
 
     .highlight1-32417,
     .highlight2-9c5d2 {
-      box-shadow: none !important; /* remove yellow glow */
+      box-shadow: none !important; 
     }
 
     /* Board container */
@@ -131,7 +131,7 @@
   height: 100vh;
 }
 
-/* 🔴 Wrong move shake animation */
+/*  Wrong move shake animation */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -255,7 +255,7 @@ i {
   background: url("/img/images.jpeg") no-repeat center/cover;
   position: fixed;
   top: 20%;
-  clip-path: circle(50% at 50% 50%); /* start: full moon */
+  clip-path: circle(50% at 50% 50%);
   z-index: 2;
   transition: filter 1s ease-in-out;
 }
@@ -267,7 +267,7 @@ i {
   background: url("/img/images.jpeg") no-repeat center/cover;
   position: fixed;
   top: 20%;
-  clip-path: circle(50% at 50% 50%); /* start: full moon */
+  clip-path: circle(50% at 50% 50%); 
   z-index: 1;
   opacity: 0.6;
   filter: brightness(10%), blur(2px);
@@ -287,6 +287,27 @@ i {
   filter: blur(2px);
   clip-path: circle(50% at 50% 50%);
 }
+
+#orbCanvas {
+  width: 800px;
+  height: 800px;
+  position: fixed;
+  top: -5%;
+  left: 20%;
+  border-radius: 50%;
+  overflow: hidden; 
+}
+
+#orbCanvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/img/1.png") no-repeat center/cover;
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+}
+
+
 
 /* reflection */
 .sun__class {
@@ -325,12 +346,12 @@ i {
 
 
 
-/* Fixed vertical container */
+
 .progress-vertical {
   position: fixed;
   top: 0;
   right: 0;
-  width: 12px;             /* thin like website loaders */
+  width: 12px;            
   height: 100%;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
@@ -338,7 +359,7 @@ i {
   overflow: visible;
 }
 
-/* Fill that grows upward */
+
 .progress-fill {
   position: absolute;
   bottom: 0;
@@ -355,7 +376,7 @@ i {
 #progressParticles {
   position: absolute;
   bottom: 0;
-  left: -6px;   /* so sparks don’t get clipped */
+  left: -6px;  
   width: 20px;
   height: 100%;
   pointer-events: none;
