@@ -14,7 +14,7 @@
    
   
 </head>
-<body class="demo-6 loading" onload="togglePause1()">
+<body class="demo-6 loading">
   <canvas id="particleCanvas"></canvas>
   <div id="orbCanvas"></div>
   <main>
@@ -699,6 +699,12 @@
   <script src="js/chess.logic.js"></script>
   <script src="js/draggable.menu.js"></script>
   <script type="module" src="js/svg.write.animation.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        togglePause();
+      });
+  </script>
 
   <!-- SVG filter for distortion -->
 <svg aria-hidden="true" width="0" height="0" style="position:absolute">
