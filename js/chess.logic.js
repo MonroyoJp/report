@@ -781,4 +781,9 @@ function capitalizeWords(text) {
     .join(" ");                        // join back with spaces
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+        togglePause();
+      });
+
+
 
