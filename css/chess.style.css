@@ -252,7 +252,7 @@ i {
   width: 310px;
   height: 320px;
   border-radius: 50%;
-  background: url("/img/images.jpeg") no-repeat center/cover;
+  background: url("../img/images.jpeg") no-repeat center/cover;
   position: fixed;
   top: 20%;
   clip-path: circle(50% at 50% 50%);
@@ -264,7 +264,7 @@ i {
   width: 310px;
   height: 320px;
   border-radius: 50%;
-  background: url("/img/images.jpeg") no-repeat center/cover;
+  background: url("../img/images.jpeg") no-repeat center/cover;
   position: fixed;
   top: 20%;
   clip-path: circle(50% at 50% 50%); 
@@ -279,7 +279,7 @@ i {
   width: 310px;
   height: 320px;
   border-radius: 50%;
-  background: url("/img/images.jpeg") no-repeat center/cover;
+  background: url("../img/images.jpeg") no-repeat center/cover;
   position: fixed;
   top: calc(20% + 330px); /* below moon */
   transform: scaleY(-1); /* flip vertically */
@@ -302,7 +302,7 @@ i {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/img/1.png") no-repeat center/cover;
+  background: url("../img/1.png") no-repeat center/cover;
   mask-image: radial-gradient(circle, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
   -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
 }
@@ -311,11 +311,11 @@ i {
 
 /* reflection */
 .sun__class {
-  background: url("/img/sun2.jpg") no-repeat center/cover;
+  background: url("../img/sun2.jpg") no-repeat center/cover;
 }
 
 .moon__class {
-  background: url("/img/moon.jpg") no-repeat center/cover;
+  background: url("../img/moon.jpg") no-repeat center/cover;
 }
 
 .right_wrapper{
