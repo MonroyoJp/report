@@ -1,3 +1,5 @@
+
+
 function playLogoAnimation() {
   const logoAnimation = anime.timeline({
     autoplay: true,
