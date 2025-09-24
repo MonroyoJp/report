@@ -48,7 +48,4 @@
   // Hide preloader when fully loaded
   window.addEventListener("load", function() {
     document.getElementById("preloader").style.display = "none";
-    if (typeof togglePause1 === "function") {
-      togglePause1();
-    }
   });

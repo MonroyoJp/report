@@ -781,9 +781,39 @@ function capitalizeWords(text) {
     .join(" ");                        // join back with spaces
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-        togglePause();
-      });
+
+function resetTimer1() {
+  // Reset clock values
+  whiteSecs1 = 0;
+  blackSecs1 = 0;
+  whiteMins1 = 3;
+  blackMins1 = 3;
+
+  // Reset state
+  activeClock1 = "w";
+  isPaused1 = false;
+  matchElapsed1 = 0;
+  matchStart1 = Date.now();
+
+  // Update display immediately
+  document.getElementById("whiteClock").innerText = "White: 03:00s";
+  document.getElementById("blackClock").innerText = "Black: 03:00s";
+  document.getElementById("whiteClock").classList.remove('active1');
+  document.getElementById("blackClock").classList.remove('active1');
+
+  console.log("Timer reset");
+}
+
+window.addEventListener("load", function() {
+  // Reset first
+  if (typeof resetTimer1 === "function") {
+    resetTimer1();
+  }
+  // Then pause immediately
+  if (typeof togglePause1 === "function") {
+    togglePause1();
+  }
+});
 
 
 
