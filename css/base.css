@@ -463,6 +463,12 @@ span.icon-start img{
 	height: 100%;
 	width: 100%;
 }
+.hide_title{
+	opacity: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+}
+
 .discussion__title{
 	font-size: 48px;
   font-weight: bold;

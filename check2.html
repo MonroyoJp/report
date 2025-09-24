@@ -1,201 +1,249 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ripple Effect Div</title>
+  <title>Browser Tab Popups</title>
   <style>
-   
+    body {
+      background: #111;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      user-select: none;
+    }
+    h2 { margin: 20px 0; }
+    img#trigger {
+      cursor: pointer;
+      width: 80px;
+      margin: 20px;
+    }
+
+    .popup {
+      position: absolute;
+      background: #fff;
+      color: #000;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.2);
+      border: 1px solid #ccc;
+    }
+    .popup-header {
+      display: flex;
+      align-items: center;
+      padding: 6px 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      cursor: move; /* shows grab cursor */
+    }
+    .popup-header img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+    .close-btn {
+      margin-left: auto;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0 6px;
+    }
+    .popup-body {
+      padding: 20px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Browser-specific header colors */
+    .chrome-header   { background: #4285f4; }
+    .firefox-header  { background: #ff7139; }
+    .safari-header   { background: #00a0ff; }
+    .edge-header     { background: #0078d7; }
+    .ie-header       { background: #1ebbee; }
   </style>
 </head>
 <body>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <h2>Click the image to spawn browser homepage popups</h2>
+  <img id="trigger" src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Trigger">
 
-<div class="checkmate-modal" id="checkmateModal">
-  <div class="checkmate-box">
-    <div class="checkmate-header">
-      <div class="checkmate-player">
-        <img src="https://i.pravatar.cc/80?img=12" alt="Winner" class="player-avatar" id="winnerAvatar">
-        <div class="player-info">
-          <div class="player-name" id="winnerName">Player 1</div>
-          <div class="player-status winner-status">Winner</div>
-        </div>
+  <!-- Chrome -->
+  <template id="chrome">
+    <div class="popup">
+      <div class="popup-header chrome-header">
+        <img src="https://www.google.com/chrome/static/images/favicons/favicon-16x16.png">
+        Chrome – New Tab
+        <div class="close-btn">✖</div>
       </div>
-
-      <div class="vs-text">vs</div>
-
-      <div class="checkmate-player">
-        <img src="https://i.pravatar.cc/80?img=32" alt="Loser" class="player-avatar" id="loserAvatar">
-        <div class="player-info">
-          <div class="player-name" id="loserName">Player 2</div>
-          <div class="player-status loser-status">Loser</div>
-        </div>
+      <div class="popup-body">
+        <h3>Google</h3>
+        <input type="text" placeholder="Search Google or type a URL" style="width:90%;padding:5px;">
       </div>
-      
     </div>
+  </template>
 
-    <div class="checkmate-body">
-      <h2>Checkmate!</h2>
-      <p id="matchTime">Match Time: 12:34</p>
+  <!-- Firefox -->
+  <template id="firefox">
+    <div class="popup">
+      <div class="popup-header firefox-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg">
+        Firefox – New Tab
+        <div class="close-btn">✖</div>
+      </div>
+      <div class="popup-body">
+        <h3>Firefox Start Page</h3>
+        <p>Top Sites · Highlights</p>
+      </div>
     </div>
+  </template>
 
-    <div class="checkmate-footer">
-      <button id="checkmateOkBtn">OK</button>
+  <!-- Safari -->
+  <template id="safari">
+    <div class="popup">
+      <div class="popup-header safari-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg">
+        Safari – Start Page
+        <div class="close-btn">✖</div>
+      </div>
+      <div class="popup-body">
+        <h3>Favorites</h3>
+        <p>Frequently Visited · Privacy Report</p>
+      </div>
     </div>
-  </div>
-</div>
+  </template>
 
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-}
-.checkmate-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-.checkmate-box {
-  background: #fff;
-  border-radius: 12px;
-  width: 420px;
-  max-width: 95%;
-  padding: 20px 25px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-  transform: scale(0.8);
-  opacity: 0;
-}
-.checkmate-header {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center everything properly */
-  gap: 20px; /* even spacing between items */
-}
+  <!-- Edge -->
+  <template id="edge">
+    <div class="popup">
+      <div class="popup-header edge-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg">
+        Edge – New Tab
+        <div class="close-btn">✖</div>
+      </div>
+      <div class="popup-body">
+        <h3>Microsoft Bing</h3>
+        <p>News · Weather · Interests</p>
+      </div>
+    </div>
+  </template>
 
-.checkmate-player {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  <!-- Internet Explorer -->
+  <template id="ie">
+    <div class="popup">
+      <div class="popup-header ie-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Internet_Explorer_10_start_icon.svg">
+        Internet Explorer – Home
+        <div class="close-btn">✖</div>
+      </div>
+      <div class="popup-body">
+        <h3>MSN Homepage</h3>
+        <p>Breaking News · Outlook.com</p>
+      </div>
+    </div>
+  </template>
 
-.vs-text {
-  font-weight: 600;
-  color: #999;
-  font-size: 14px;
-}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    const trigger = document.getElementById("trigger");
+    let isOpen = false;
 
-.player-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-.player-info {
-  display: flex;
-  flex-direction: column;
-}
-.player-name {
-  font-weight: 600;
-  color: #222;
-}
-.player-status {
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: 4px;
-}
-.winner-status {
-  color: #2e8b57;
-}
-.loser-status {
-  color: #c0392b;
-}
-.vs-text {
-  font-weight: 600;
-  color: #999;
-  font-size: 14px;
-}
-.checkmate-body {
-  text-align: center;
-  margin: 15px 0;
-}
-.checkmate-body h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-  color: #333;
-}
-.checkmate-body p {
-  font-size: 14px;
-  color: #666;
-  margin-top: 8px;
-}
-.checkmate-footer {
-  text-align: center;
-  margin-top: 10px;
-}
-#checkmateOkBtn {
-  background: #5166fa;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-#checkmateOkBtn:hover {
-  background: #3f51d1;
-}
-</style>
+    const coordsList = [
+      { x:53,  y:277, w:333, h:220, id:"chrome" },
+      { x:409, y:127, w:427, h:220, id:"firefox" },
+      { x:912, y:156, w:313, h:220, id:"safari"  },
+      { x:437, y:571, w:304, h:200, id:"edge"    },
+      { x:786, y:451, w:311, h:200, id:"ie"      }
+    ];
 
-<script>
-function showCheckmateModal(winner, loser, winnerImg, loserImg, time) {
-  const modal = document.getElementById('checkmateModal');
-  document.getElementById('winnerName').textContent = winner;
-  document.getElementById('loserName').textContent = loser;
-  document.getElementById('winnerAvatar').src = winnerImg;
-  document.getElementById('loserAvatar').src = loserImg;
-  document.getElementById('matchTime').textContent = `Match Time: ${time}`;
+    trigger.addEventListener("click", () => {
+      if (!isOpen) {
+        coordsList.forEach((c, i) => spawnPopup(c, i));
+        isOpen = true;
+      } else {
+        closeAllPopups();
+        isOpen = false;
+      }
+    });
 
-  modal.style.display = "flex";
+    function spawnPopup({x,y,w,h,id}, delayIndex) {
+      const tmpl = document.getElementById(id);
+      const popup = tmpl.content.firstElementChild.cloneNode(true);
+      document.body.appendChild(popup);
 
-  anime({
-    targets: ".checkmate-box",
-    opacity: [0, 1],
-    scale: [0.8, 1],
-    easing: "easeOutBack",
-    duration: 600
-  });
+      // initial at center
+      const centerX = window.innerWidth/2 - w/2;
+      const centerY = window.innerHeight/2 - h/2;
+      popup.style.left = centerX+"px";
+      popup.style.top = centerY+"px";
+      popup.style.width = w+"px";
+      popup.style.height = h+"px";
 
-  anime({
-    targets: ".checkmate-player",
-    translateY: [20, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(120),
-    duration: 400,
-    easing: "easeOutCubic"
-  });
-}
+      anime({
+        targets: popup,
+        left: x+"px",
+        top: y+"px",
+        opacity: 1,
+        scale: 1,
+        easing: "easeOutBack",
+        duration: 800,
+        delay: delayIndex * 150
+      });
 
-document.getElementById('checkmateOkBtn').addEventListener('click', () => {
-  anime({
-    targets: ".checkmate-box",
-    opacity: [1, 0],
-    scale: [1, 0.8],
-    easing: "easeInBack",
-    duration: 400,
-    complete: () => document.getElementById('checkmateModal').style.display = "none"
-  });
-});
+      // Make draggable
+      makeDraggable(popup);
 
-// Example usage (you can trigger this after detecting checkmate)
-showCheckmateModal("Player", "Coach David", "https://i.pravatar.cc/80?img=12", "https://i.pravatar.cc/80?img=32", "5:23");
-</script>
+      popup.querySelector(".close-btn").onclick = () => closePopup(popup, w, h);
+    }
 
+    function closePopup(popup, w, h) {
+      const centerX = window.innerWidth/2 - w/2;
+      const centerY = window.innerHeight/2 - h/2;
+      anime({
+        targets: popup,
+        left: centerX+"px",
+        top: centerY+"px",
+        opacity: 0,
+        scale: 0.2,
+        easing: "easeInBack",
+        duration: 500,
+        complete: () => popup.remove()
+      });
+    }
 
+    function closeAllPopups() {
+      document.querySelectorAll(".popup").forEach(p => {
+        const rect = p.getBoundingClientRect();
+        closePopup(p, rect.width, rect.height);
+      });
+    }
+
+    function makeDraggable(popup) {
+      const header = popup.querySelector(".popup-header");
+      let offsetX = 0, offsetY = 0, startX, startY, dragging = false;
+
+      header.addEventListener("mousedown", (e) => {
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = popup.getBoundingClientRect();
+        offsetX = startX - rect.left;
+        offsetY = startY - rect.top;
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", stop);
+      });
+
+      function move(e) {
+        if (!dragging) return;
+        popup.style.left = (e.clientX - offsetX) + "px";
+        popup.style.top  = (e.clientY - offsetY) + "px";
+      }
+
+      function stop() {
+        dragging = false;
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", stop);
+      }
+    }
+  </script>
 </body>
 </html>
