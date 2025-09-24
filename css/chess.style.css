@@ -294,8 +294,8 @@ i {
   width: 800px;
   height: 800px;
   position: fixed;
-  top: -5%;
-  left: 20%;
+  top: 5%;
+  left: 24%;
   border-radius: 50%;
   overflow: hidden; 
 }
