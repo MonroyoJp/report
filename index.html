@@ -6,6 +6,7 @@
   <title>Introduction to Computing | Group 4 Application System Software</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/preloader.css" />
   <link rel="stylesheet" type="text/css" href="pater/pater.css" />
   <link rel="stylesheet" type="text/scss" href="css/style.scss" />
   <link rel="stylesheet" href="chessboardjs-1.0.0/css/chessboard-1.0.0.css">
@@ -14,7 +15,19 @@
    
   
 </head>
-<body class="demo-6 loading" onload="togglePause1()">
+<body class="demo-6 loading">
+  <div id="preloader">
+  <div class="center">
+    <div class="loader">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+      <div class="circle circle-4"></div>
+    </div>
+    <h2 class="glitch-text slide__title glitch_text" data-text="Loading...">Loading...</h2>
+  </div>
+</div>
+
   <canvas id="particleCanvas"></canvas>
   <div id="orbCanvas"></div>
   <main>
@@ -699,6 +712,7 @@
   <script src="js/chess.logic.js"></script>
   <script src="js/draggable.menu.js"></script>
   <script type="module" src="js/svg.write.animation.js"></script>
+  <script type="module" src="js/preloader.js"></script>
 
   <!-- SVG filter for distortion -->
 <svg aria-hidden="true" width="0" height="0" style="position:absolute">

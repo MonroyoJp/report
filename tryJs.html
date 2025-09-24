@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var uniqueInOrder=function(iterable){
+
+        let iterableLength = iterable.length;
+        let iterableLetters = [];
+        let currentLetter;
+        let nextLetter;
+        
+        for (let i = 0; i < iterableLength; i++){
+            if(Array.isArray(iterable)){
+                currentLetter = iterable[i];
+                nextLetter = iterable[i + 1];
+            }
+            else{
+                currentLetter = iterable.charAt(i);
+                nextLetter = iterable.charAt(i + 1);
+            }
+                      
+            if(currentLetter != nextLetter){
+                iterableLetters.push(currentLetter);
+            }
+        };
+
+        console.log(iterableLetters);
+        }
+
+        uniqueInOrder("AAAABBBCCDAABBB");
+        uniqueInOrder("A");
+        uniqueInOrder(1,2,3,3,4);
+        uniqueInOrder([]);
+        uniqueInOrder('ABBCcAD');
+        uniqueInOrder([1,2,2,3,3]);
+
+        function areYouPlayingBanjo(name) {
+        let result = "";
+        let playsBanjo = " plays banjo";
+        name.charAt(0) == "r" || name.charAt(0) == "R" ? result = playsBanjo: result = " does not" + playsBanjo;
+        return name + result;
+        }
+
+        console.log(areYouPlayingBanjo("Adam"));
+        console.log(areYouPlayingBanjo("Paul"));
+        console.log(areYouPlayingBanjo("Ringo"));
+        console.log(areYouPlayingBanjo("bravo"));
+        console.log(areYouPlayingBanjo("rolf"));
+        
+        function evenOrOdd(number) {
+        return number % 2 == 0 ? "Even": "Odd";
+        }
+
+        console.log(evenOrOdd(-42));
+        console.log(evenOrOdd(42));
+
+        // function add(a, b) {
+        //     return new Promise(function(resolve, reject) {
+        //         setTimeout(() => {
+        //             if (typeof a !== "number" || typeof b !== "number") {
+        //                 return reject(new TypeError("Inputs must be numbers!"));
+        //             }
+        //             resolve(a + b);
+        //         }, 1000);
+        //     });
+        // }
+
+        // var myPromise = add(10, 3);
+        // myPromise.then(
+        //     function(result) {
+        //         document.write("10 + 3: ", result, "<br>");
+        //         return add(null, "foo"); 
+        //     }
+        // ).then(
+        //     function(result) {
+        //         document.write("This will not run: ", result, "<br>");
+        //     }
+        // ).catch(function(err) {
+        //     console.error(err); 
+        //     document.write("Error: " + err.message);
+        // });
+    </script>
+</body>
+</html>
