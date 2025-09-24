@@ -781,6 +781,7 @@ function capitalizeWords(text) {
     .join(" ");                        // join back with spaces
 }
 
+
 function resetTimer1() {
   // Reset clock values
   whiteSecs1 = 0;
@@ -813,4 +814,6 @@ window.addEventListener("load", function() {
     togglePause1();
   }
 });
+
+
 
