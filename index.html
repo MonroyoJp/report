@@ -62,39 +62,39 @@
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
           <img src="img/9.png" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/10.png" alt="discussion"></div></div></div>
+          <img src="img/10.png" class="trigger" data-popup="popup1" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/11.png" alt="discussion"></div></div></div>
+          <img src="img/11.png" class="trigger" data-popup="popup2" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/12.png" alt="discussion"></div></div></div>
+          <img src="img/12.png" class="trigger" data-popup="popup3" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/13.png" alt="discussion"></div></div></div>
+          <img src="img/13.png" class="trigger" data-popup="popup4" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/14.png" alt="discussion"></div></div></div>
+          <img src="img/14.png" class="trigger" data-popup="popup5" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/15.png" alt="discussion"></div></div></div>
+          <img src="img/15.png" class="trigger" data-popup="popup6" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/16.png" alt="discussion"></div></div></div>
+          <img src="img/16.png" class="trigger" data-popup="popup7" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/17.png" alt="discussion"></div></div></div>
+          <img src="img/17.png" class="trigger" data-popup="popup8" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/18.png" alt="discussion"></div></div></div>
+          <img src="img/18.png" class="trigger" data-popup="popup9" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/19.png" alt="discussion"></div></div></div>
+          <img src="img/19.png" class="trigger" data-popup="popup10" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/20.png" alt="discussion"></div></div></div>
+          <img src="img/20.png" class="trigger" data-popup="popup11" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/21.png" alt="discussion"></div></div></div>
+          <img src="img/21.png" class="trigger" data-popup="popup12" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/22.png" alt="discussion"></div></div></div>
+          <img src="img/22.png" class="trigger" data-popup="popup13" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/23.png" alt="discussion"></div></div></div>
+          <img src="img/23.png" class="trigger" data-popup="popup14" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/24.png" alt="discussion"></div></div></div>
+          <img src="img/24.png" class="trigger" data-popup="popup15" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/25.png" alt="discussion"></div></div></div>
+          <img src="img/25.png" class="trigger" data-popup="popup16" alt="discussion"></div></div></div>
           <div class="slide seventh-slide"><div class="slide__img"><div class="slide__content">
-          <img src="img/26.png" alt="discussion"></div></div></div>
+          <img src="img/26.png" class="trigger" data-popup="popup17" alt="discussion"></div></div></div>
           <div class="slide end-slide"><div class="slide__img"><div class="slide__content">
           <img src="img/27.png" alt="discussion"></div></div></div>
           <div class="slide end-slide"><div class="slide__img"><div class="slide__content">
@@ -570,7 +570,7 @@
           <h2 class="slide__title" data-group="discussion"></h2>
         </div>
         <div class="slide">
-          <h2 class="slide__title" data-group="discussion"></h2>
+          <h2 class="slide__title hide_title" data-group="discussion">HAHAHA</h2>
         </div>
         <div class="slide">
           <h2 class="slide__title" data-group="discussion"></h2>
@@ -730,5 +730,15 @@
   <audio id="checkSound" src="audio/move-check.mp3"></audio>
   <audio id="mateSound" src="audio/game-end.mp3"></audio>
   <audio id="incorrectSound" src="audio/incorrect-2-15.mp3"></audio>
+
+  <script>
+  document.querySelectorAll(".hide_title").forEach(h2 => {
+  h2.addEventListener("click", () => {
+    console.log("clicked:", h2.textContent.trim());
+   
+  });
+});
+
+</script>
 </body>
 </html>
