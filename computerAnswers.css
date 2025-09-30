@@ -1,0 +1,738 @@
+ *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Acme",'Courier New', Courier, monospace;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            height: calc(100% - 30%);
+            width: 100%;
+        }
+
+        .col {
+            display: grid;
+            gap: 2px;
+            height: calc(100% - 85%);
+            width: 100%;
+            margin-top: 2px;
+        }
+
+        .col1 {
+            grid-template-columns: 0.5fr 2fr repeat(8, 1fr) 0.3fr;
+        }
+        .col2 {
+            grid-template-columns: 0.5fr 5fr repeat(5, 1fr) 0.3fr;
+        }
+        .col3 {
+            grid-template-columns: 0.5fr repeat(3, 1fr) 2fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
+        }
+        .col4 {
+            grid-template-columns: 0.5fr repeat(10, 1fr) 0.3fr;
+        }
+
+
+
+        header nav{
+            height: calc(100% - 85%);
+            width: 100%;
+            display: grid;
+            grid-template-columns: 0.5fr repeat(4, 1fr) 4fr 1fr 1fr 0.3fr;
+            gap: 2px;
+        }
+
+        
+
+        .navTile,
+        .headerTile {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navTile {
+            background-color: #ffecdc;
+        }
+        nav .menuTile {
+            background-color: #fff5ed;
+        }
+
+        .headerTile {
+            background-color: #fff5ed;
+        }
+
+         .main{
+            height: 25%;
+            width: 20%;
+        }
+        .menu {
+            height: 40%;
+            width: 25%;
+        }
+
+        .institution{
+            height: 35%;
+            width: 25%;
+        }
+
+        .search-box {
+            position: relative;
+            display: inline-block;
+
+        }
+        .search-box::placeholder {
+            color: #c7c7c7;
+            font-family: "poppins";
+        }
+
+        .search-box input[type="search"] {
+            padding: 4px 100px 4px 20px; /* space for icon */
+            font-size: 16px;
+            border: 1px solid #1c232a;
+        }
+
+        .search-box::before {
+            content: "🔍"; /* Unicode magnifying glass */
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #bdbdbd;
+            pointer-events: none; /* let clicks go through */
+        }
+        .title_small {
+            color: #1c232a;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        .title_big {
+            color: #fe838f;
+            position: absolute;
+            font-size: 5rem;
+            font-family: "Acme";
+             /* playful outline using multiple text shadows */
+            text-shadow: 
+                -2px -2px 0 #1c232a,
+                0   -3px 0 #1c232a,
+                0    3px 0 #1c232a;
+        }
+
+        .title_subject {
+            background-color: #47d8c5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: -4px 4px 1px 1px #1c232a;
+            border: 2px solid #1c232a;
+        }
+
+        .flowerSwirl{
+            height: 10%;
+            width: 10%;
+            position: absolute;
+            transform: translate(50%, 50%);
+        }
+        .flowerSwirl2{
+            height: auto;
+            width: 100%;
+            transform: translate(50%, -50%);
+
+        }
+
+        .content {
+            padding: 0% 10% 0% 10%;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .tab1,
+        .tab2 {
+            width: 100%;
+            border: 2px solid #1c232abc;
+            height: 30%;
+            margin-bottom: 30px;
+
+        }
+
+        .tab2{
+            border: none ;
+            box-shadow: none;
+            display: flex;
+            gap: 2%;
+            height: 50%;
+        }
+
+        .tab2Left,
+        .tab2Right{
+            width: 50%;
+            border: 2px solid #1c232abc;
+        }
+
+        
+        .tab2Left{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(4, 1fr) 0.2fr;
+            gap: 1px;
+        }
+
+        .tabNav{
+            height: 5vh;
+            border-bottom: 2px solid #1c232abc;
+            background-color: #fff5ed;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            padding-right: 1%;
+            gap: 1%;
+        }
+
+        .icon{
+            height: 45%;
+            width: 2%;
+            background-color: #fe838f;
+            border: 2px solid #1c232a;
+        }
+        .tabContent{
+            height: 80%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .tabTitle{
+            font-size: 24px;
+        }
+
+        .taskDetails{
+            font-size: 14px;
+            width: 80%;
+            font-family: "poppins";
+            text-align: center;
+        }
+
+        .green_btn {
+            position: relative;
+            overflow: hidden;
+            padding: 8px 34px;
+            background-color: #47d8c5;
+            color: #ffffff;
+            border: 1px solid #1c232a;
+            font-size: 12px;
+            box-shadow: -4px 4px 0px 1px #1c232a;
+            cursor: pointer;
+            }
+            .btn-wrapper {
+            position: absolute;
+            display: inline-block;
+            transform: translate(-20%, -50%);
+
+            }
+
+            .btn-wrapper2 {
+                position: absolute;
+                display: inline-block;
+            transform: translate(20%, 200%);
+
+            }
+
+            /* the shadow rectangle */
+            .btn-wrapper::before,
+            .btn-wrapper2::before {
+            content: "";
+            position: absolute;
+            top: 4px;   /* vertical offset */
+            right: 1px;  /* horizontal offset */
+            width: 100%;
+            height: 90%;
+            background: #fff;
+            border: 2px solid #1c232abc;
+            z-index: 0; /* behind the button */
+            }
+
+            /* main button */
+            .white_btn,
+            .white_btn2{
+            position: relative;
+            z-index: 1;
+            padding: 8px 54px;
+
+            background: #fff;
+            border: 2px solid #1c232abc;
+            cursor: pointer;
+            overflow: hidden;
+            }
+
+            .white_btn a,
+            .white_btn2 a{
+            font-size: 14px;
+            font-weight: bold;
+            color: #1c232a;
+            text-decoration: none;
+            }
+
+
+            .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear forwards;
+            background-color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            }
+
+            .ripple2 {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear forwards;
+            background-color: #47d8c5a6;
+            pointer-events: none;
+            }
+
+            @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+            }
+
+            .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            opacity: 1;
+            pointer-events: none;
+            animation: pop 700ms ease-out forwards;
+            }
+            @keyframes pop {
+            to {
+                transform: translate(var(--x), var(--y)) scale(0.2);
+                opacity: 0;
+            }
+            }
+
+            .tile_nab2Left{
+                background-color: #47d8c5;
+            }
+
+            .leftPart,
+            .middlePart
+            {
+                display: flex;
+                align-items: flex-end;
+                font-size: 24px;
+            }
+
+            .rightPart{
+                display: flex;
+                align-items: flex-start;
+                font-size: 24px;
+            }
+
+            .leftPart{
+                justify-content: right;
+            }
+
+            .tab2LeftTaskleft{
+                padding-right: 5px;
+            }
+
+            .tab2LeftTaskMid{
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            .taskIcon{
+                height: 55%;
+                width: 18%;
+                position: absolute;
+                transform: translate(60%, -65%);
+                left: 17%;
+            }
+
+            .tab2Right{
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                padding: 20px;
+        }
+
+
+            .system_unitIcon{
+                height: 55%;
+                width: 15%;
+            }
+
+            .task2AnswerWrapper{
+                height: 200%;
+                width: 100%;
+                position: relative;
+
+            }
+
+
+            .task2AnswerWrapper .tabTitle{
+                text-align: center !important;
+            }
+
+            .wave,
+            .wave2,
+            .wave3,
+            .wave4,
+            .wave5 {
+      width: 100%;
+      height: 200px;
+      position: absolute;
+    }
+
+    .wave{
+      top: 4%;
+    }
+
+    .wave2{
+        top: 29%;
+    }
+    .wavePath {
+      fill: none;
+      stroke: #d4d5d2;
+      stroke-width: 4;
+    }
+
+    .task2Title{
+        padding-bottom: 40px;
+    }
+
+    .task2Details{
+        text-align: center;
+            font-size: 14px;
+    }
+
+    .task2Table{
+        width: 100%;
+        padding: 0 10% 0 10%;
+        z-index: 1;
+        position: relative;
+    }
+
+    .processingCategory,
+    .storageCategory{
+        display: flex;
+        height: 20%;
+        width: 100%;
+        justify-content: space-around;
+        position: relative;
+    }
+
+    .cpuBox,
+    .gpuBox,
+    .chipsetBox,
+    .hddBox,
+    .ssdBox,
+    .optDriveBox {
+    position: relative; /* so ::after uses this as reference */
+    width: 20%;
+    height: 35%;
+    border: 2px solid #1c232abc;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.cpuBox,
+.hddBox{
+    margin-left: 5%;
+    box-shadow: -4px 4px 1px 1px #47d8c5;
+}
+.gpuBox,
+.ssdBox{
+    box-shadow: -4px 4px 1px 1px #FDE05F;
+}
+.chipsetBox,
+.optDriveBox{
+    margin-right: 5%;
+    box-shadow: -4px 4px 1px 1px #47d8c5;
+}
+
+
+   .cpuBox::after,
+   .gpuBox::after,
+   .chipsetBox::after,
+    .hddBox::after,
+    .ssdBox::after,
+    .optDriveBox::after{
+    position: absolute;
+    height: 25%;         /* relative to .cpuBox height */
+    width: 25%;          /* relative to .cpuBox width */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;    /* scales with parent font size */
+    border: 1px solid #1c232a;
+    top: 85%;            /* instead of translate */
+    left: 85%;           /* positioned relative to .cpuBox */
+}
+
+  
+.cpuBox::after,
+.hddBox::after{
+    content: "1";   
+    background-color: #47d8c5;
+
+}
+
+.gpuBox::after,
+.ssdBox::after{
+    content: "2";   
+    background-color: #FDE05F;
+
+}
+
+.chipsetBox::after,
+.optDriveBox::after{
+    content: "3";   
+    background-color: #47d8c5;
+
+}
+.cpuBox::before,
+   .gpuBox::before,
+   .chipsetBox::before,
+       .hddBox::before,
+    .ssdBox::before,
+    .optDriveBox::before{
+    position: absolute;
+    font-size: 14px;
+    bottom: -50%;
+    text-align: center;
+    width: 100%;
+    white-space: pre;
+
+   }
+
+  .cpuBox::before{
+    content: "CPU\A Central Processing Unit";
+  }
+  .gpuBox::before{
+    content: "GPU\A Graphics Processing Unit ";
+  }
+  .chipsetBox::before{
+    content: "Motherboard\A Chipset";
+  }
+
+  
+  .hddBox::before{
+    content: "HDD\A Hard Drive Disk";
+  }
+  .ssdBox::before{
+    content: "SSD\A Solid-State Drive  ";
+  }
+  .optDriveBox::before{
+    content: "Optical Drive\A (DVD/CD)";
+  }
+
+  .inputCategory,
+.outputCategory,
+.commCategory {
+    display: flex;
+    height: 20%;
+    width: 100%;
+    justify-content: space-around;
+    position: relative;
+}
+
+/* General box styling */
+.keyboardBox, .mouseBox, .micBox,
+.monitorBox, .printerBox, .speakerBox,
+.nicBox, .wifiBox, .btBox {
+    position: relative;
+    width: 20%;
+    height: 35%;
+    border: 2px solid #1c232abc;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+/* Shadows */
+.keyboardBox, .monitorBox, .nicBox {
+    margin-left: 5%;
+    box-shadow: -4px 4px 1px 1px #47d8c5;
+}
+.mouseBox, .printerBox, .wifiBox {
+    box-shadow: -4px 4px 1px 1px #FDE05F;
+}
+.micBox, .speakerBox, .btBox {
+    margin-right: 5%;
+    box-shadow: -4px 4px 1px 1px #47d8c5;
+}
+
+/* Number bubbles */
+.keyboardBox::after, .mouseBox::after, .micBox::after,
+.monitorBox::after, .printerBox::after, .speakerBox::after,
+.nicBox::after, .wifiBox::after, .btBox::after {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    border: 1px solid #1c232a;
+    top: 85%;
+    left: 85%;
+}
+
+.keyboardBox::after,
+.monitorBox::after,
+.nicBox::after { content: "1"; background-color: #47d8c5; }
+
+.mouseBox::after,
+.printerBox::after,
+.wifiBox::after { content: "2"; background-color: #FDE05F; }
+
+.micBox::after,
+.speakerBox::after,
+.btBox::after { content: "3"; background-color: #47d8c5; }
+
+/* Labels */
+.keyboardBox::before, .mouseBox::before, .micBox::before,
+.monitorBox::before, .printerBox::before, .speakerBox::before,
+.nicBox::before, .wifiBox::before, .btBox::before {
+    position: absolute;
+    font-size: 14px;
+    bottom: -50%;
+    text-align: center;
+    width: 100%;
+    white-space: pre;
+}
+
+.keyboardBox::before { content: "Keyboard\A Input Device"; }
+.mouseBox::before { content: "Mouse\A Input Device"; }
+.micBox::before { content: "Microphone\A Input Device"; }
+
+.monitorBox::before { content: "Monitor\A Output Device"; }
+.printerBox::before { content: "Printer\A Output Device"; }
+.speakerBox::before { content: "Speakers\A Output Device"; }
+
+.nicBox::before { content: "NIC\A Network Card"; }
+.wifiBox::before { content: "Wi-Fi Adapter\A Communication"; }
+.btBox::before { content: "Bluetooth Dongle\A Communication"; }
+
+.task1Answer{
+    position: absolute;
+    z-index: 500;
+    background-color: #1c232a4e;
+    height: 500%;
+    width: 100%;
+    display: none;
+    justify-content: center;
+
+}
+
+.answerTab{
+    position: fixed;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: -8px 8px 3px 5px #47d8c5;
+    border: 1px solid #1c232a;
+    margin-top: 10%;
+    opacity: 0;
+    
+}
+
+.task1Nav{
+    background-color: #fff5ed;
+    height: 30%;
+    width: 100%;
+    border-bottom: 1px solid #1c232a;
+    top: 0;
+    left: 0;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task1AnswerP{
+    padding: 30px;
+    opacity: 0;
+}
+
+.task1AnswerP p span{
+    color: #47d8c5;
+}
+
+.task1AnswerP p span[data-char] {
+  color: inherit; /* generated character spans inherit normal text color */
+}
+
+.cpuBox,
+.gpuBox,
+.chipsetBox,
+.hddBox,
+.ssdBox,
+.optDriveBox,
+.keyboardBox,
+.mouseBox,
+.micBox,
+.monitorBox,
+.printerBox,
+.speakerBox,
+.nicBox,
+.wifiBox,
+.btBox
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cpuBox img:hover,
+.gpuBox img:hover,
+.chipsetBox img:hover,
+.hddBox img:hover,
+.ssdBox img:hover,
+.optDriveBox img:hover,
+.keyboardBox img:hover,
+.mouseBox img:hover,
+.micBox img:hover,
+.monitorBox img:hover,
+.printerBox img:hover,
+.speakerBox img:hover,
+.nicBox img:hover,
+.wifiBox img:hover,
+.btBox img:hover{
+    transition: 0.2s ease-in-out;
+    transform: scale(1.7);
+}
+.cpuBox img,
+.gpuBox img,
+ .chipsetBox img,
+ .hddBox img,
+.ssdBox img,
+.optDriveBox img,
+.keyboardBox img,
+.mouseBox img,
+.micBox img,
+.monitorBox img,
+.printerBox img,
+.speakerBox img,
+.nicBox img,
+.wifiBox img,
+.btBox img{
+    height: 80%;
+}
+

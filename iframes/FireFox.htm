@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lwt-newtab-brighttext="" lang="en-US" dir="ltr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; object-src 'none'; script-src resource: chrome:; connect-src https:; img-src https: data: blob: chrome:; style-src 'unsafe-inline';">
+    <meta name="color-scheme" content="light dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-l10n-id="newtab-page-title">New Tab</title>
+    <link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
+    <link rel="localization" href="branding/brand.ftl">
+    <link rel="localization" href="toolkit/branding/brandings.ftl">
+    <link rel="localization" href="browser/newtab/newtab.ftl">
+    <link rel="localization" href="toolkit/global/mozMessageBar.ftl">
+    <link rel="stylesheet" href="chrome://global/skin/design-system/tokens-brand.css">
+    <link rel="stylesheet" href="chrome://browser/content/contentSearchUI.css">
+    <link rel="stylesheet" href="chrome://newtab/content/css/activity-stream.css">
+    <link rel="stylesheet" href="FireFox_files/activity-stream.css">
+    <link rel="stylesheet" href="FireFox_files/moz-label.css">
+    <link rel="stylesheet" href="FireFox_files/moz-button.css">
+    <link rel="stylesheet" href="FireFox_files/moz-toggle.css">
+    <link rel="stylesheet" href="FireFox_files/moz-fieldset.css">
+    <link rel="stylesheet" href="FireFox_files/tokens-brand.css">
+    <link rel="stylesheet" href="FireFox_files/activity-stream.css">
+    <link rel="stylesheet" href="FireFox_files/moz-button-group.css">
+    <link rel="stylesheet" href="FireFox_files/moz-input-common.css">
+    <link rel="stylesheet" href="FireFox_files/text-and-typography.css">
+
+  </head>
+  <!-- Cached: Wed, 24 Sep 2025 14:15:35 GMT -->
+  <body class="activity-stream" style="--newtab-wallpaper: url(); --newtab-wallpaper-color: transparent; --newtab-search-icon: url(blob:null/41f691a4-bc9e-43d4-9529-917fc8f19a25);">
+    <div id="header-asrouter-container" role="presentation"></div>
+    <div id="root"><div class="has-weather has-search no-recommended-stories"><menu class="personalizeButtonWrapper"><span><button class="personalize-button personalize-animate-appear-done personalize-animate-enter-done" data-l10n-id="newtab-customize-panel-icon-button" title="Customize this page"><div><img role="presentation" src="chrome://global/skin/icons/edit-outline.svg"></div><label data-l10n-id="newtab-customize-panel-icon-button-label">Customize</label></button><div class="customize-menu" role="dialog" data-l10n-id="newtab-settings-dialog-label" aria-label="Settings"><div class="close-button-wrapper"><moz-button onclick="() => this.props.onClose()" id="close-button" type="icon ghost" data-l10n-id="newtab-custom-close-menu-button" iconsrc="chrome://global/skin/icons/close.svg" data-l10n-attrs="label,tooltiptext" size="default" iconposition="start" menuid=""></moz-button></div><div class="home-section"><div class="wallpapers-section"><div><div class="category-header"><h2 data-l10n-id="newtab-wallpaper-title">Wallpapers</h2><button class="wallpapers-reset" data-l10n-id="newtab-wallpaper-reset">Reset to default</button></div><div role="grid" aria-label="Wallpaper category selection. Use arrow keys to navigate."><fieldset class="category-list"><div><button id="abstracts" style="background-image:url(https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/18c7861f-0c9d-48d4-a98c-fb8999e331bd.avif)" class="wallpaper-input" tabindex="0"></button><label for="abstracts" data-l10n-id="newtab-wallpaper-category-title-abstract">Abstract</label></div><div><button id="solid-colors" style="background-color:#76C1FF" class="wallpaper-input" tabindex="-1"></button><label for="solid-colors" data-l10n-id="newtab-wallpaper-category-title-colors">Solid colors</label></div><div><button id="photographs" style="background-image:url(https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/e94b1e49-c518-40d6-98e3-dffab6cc370d.avif)" class="wallpaper-input" tabindex="-1"></button><label for="photographs" data-l10n-id="newtab-wallpaper-category-title-photographs">Photographs</label></div><div><button id="celestial" style="background-image:url(https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/55b678ff-15c3-49d5-bdbc-40f8413cfb8a.avif)" class="wallpaper-input" tabindex="-1"></button><label for="celestial" data-l10n-id="newtab-wallpaper-category-title-celestial">Celestial</label></div><div><button id="custom-wallpaper" style="background-color:" class="wallpaper-input theme-custom-wallpaper" tabindex="-1" aria-errormessage="customWallpaperError"></button><label for="custom-wallpaper" data-l10n-id="newtab-wallpaper-upload-image">Upload an image</label></div></fieldset></div></div></div><span class="divider" role="separator"></span><div class="settings-toggles"><div id="weather-section" class="section"><moz-toggle id="weather-toggle" pressed="" ontoggle="function() {
+    [native, code]
+}" data-preference="showWeather" data-eventsource="WEATHER" data-l10n-id="newtab-custom-weather-toggle" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Weather" description="Today’s forecast at a glance"></moz-toggle></div><div id="shortcuts-section" class="section"><moz-toggle id="shortcuts-toggle" pressed="" ontoggle="function() {
+    [native, code]
+}" data-preference="feeds.topsites" data-eventsource="TOP_SITES" data-l10n-id="newtab-custom-shortcuts-toggle" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Shortcuts" description="Sites you save or visit"><div slot="nested"><div class="more-info-top-wrapper"><div class="more-information" style="margin-top: var(--space-small);"><select id="row-selector" class="selector" name="row-count" data-preference="topSitesRows" aria-labelledby="custom-shortcuts-title"><option selected="selected" value="1" data-l10n-id="newtab-custom-row-selector" data-l10n-args="{&quot;num&quot;: 1}">1 row</option><option value="2" data-l10n-id="newtab-custom-row-selector" data-l10n-args="{&quot;num&quot;: 2}">2 rows</option><option value="3" data-l10n-id="newtab-custom-row-selector" data-l10n-args="{&quot;num&quot;: 3}">3 rows</option><option value="4" data-l10n-id="newtab-custom-row-selector" data-l10n-args="{&quot;num&quot;: 4}">4 rows</option></select></div></div></div></moz-toggle></div></div><span class="divider" role="separator"></span><div><button id="settings-link" class="external-link" data-l10n-id="newtab-custom-settings">Manage more settings</button></div></div></div></span></menu><div class="weatherWrapper"><div class="weather"><div class="weatherCard"><a data-l10n-id="newtab-weather-see-forecast" data-l10n-args="{&quot;provider&quot;: &quot;AccuWeather®&quot;}" href="https://www.accuweather.com/en/ph/mandaluyong/768148/daily-weather-forecast/768148?lang=en-us&amp;partner=web_mozilla_adc" class="weatherInfoLink" title="See forecast in AccuWeather®"><div class="weatherIconCol"><span class="weatherIcon iconId7"></span></div><div class="weatherText"><div class="weatherForecastRow"><span class="weatherTemperature">26°c</span></div><div class="weatherCityRow"><span class="weatherCity">Mandaluyong</span></div></div></a><div class="weatherButtonContextMenuWrapper"><button aria-haspopup="true" data-l10n-id="newtab-menu-section-tooltip" class="weatherButtonContextMenu" title="Open menu" aria-label="Open menu"></button></div></div><span class="weatherSponsorText"><span data-l10n-id="newtab-weather-sponsored" data-l10n-args="{&quot;provider&quot;: &quot;AccuWeather®&quot;}">AccuWeather® ∙ Sponsored</span></span></div></div><div class="mobileDownloadPromoWrapper "></div><div class="outer-wrapper ds-outer-wrapper-breakpoint-override visible-logo"><main class="newtab-main"><div class="non-collapsible-section"><div class="search-wrapper"><h1 class="logo-and-wordmark-wrapper"><div class="logo-and-wordmark" role="img" data-l10n-id="newtab-logo-and-wordmark" aria-label="Mozilla Firefox"><div class="logo"></div><div class="wordmark"></div></div></h1><div class="search-inner-wrapper"><button class="search-handoff-button" tabindex="-1" data-l10n-args="{&quot;engine&quot;:&quot;Google&quot;}" data-l10n-id="newtab-search-box-handoff-input" title="Search with Google or enter address" aria-label="Search with Google or enter address"><div class="fake-textbox" data-l10n-args="{&quot;engine&quot;:&quot;Google&quot;}" data-l10n-id="newtab-search-box-handoff-text">Search with Google or enter address</div><input type="search" class="fake-editable" tabindex="-1" aria-hidden="true"><div class="fake-caret" style="--caret-blink-count: 5; --caret-blink-time: 1060ms;"></div></button></div></div></div><div class="body-wrapper on"><dialog class="report-content-form" id="dialog-report"><form action=""><moz-radio-group name="report" id="report-group" data-l10n-id="newtab-report-content-why-reporting-this" classname="report-content-options" data-l10n-attrs="description,label" label="Why are you reporting this?"><moz-radio data-l10n-id="newtab-report-content-wrong-category" value="wrong_category" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Wrong category"></moz-radio><moz-radio data-l10n-id="newtab-report-content-outdated" value="outdated" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Outdated"></moz-radio><moz-radio data-l10n-id="newtab-report-content-inappropriate-offensive" value="inappropriate_or_offensive" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Inappropriate or offensive"></moz-radio><moz-radio data-l10n-id="newtab-report-content-spam-misleading" value="spam_or_misleading" data-l10n-attrs="label,description,accesskey" inputlayout="inline" label="Spam or misleading"></moz-radio></moz-radio-group><moz-button-group><moz-button type="primary" data-l10n-id="newtab-report-submit" onclick='() => {
+    const {
+      card_type,
+      corpus_item_id,
+      position,
+      reporting_url,
+      scheduled_corpus_item_id,
+      section_position,
+      section,
+      title,
+      topic,
+      url
+    } = report;
+    if (card_type === "organic") {
+      dispatch(actionCreators.AlsoToMain({
+        type: actionTypes.REPORT_CONTENT_SUBMIT,
+        data: {
+          card_type,
+          corpus_item_id,
+          report_reason: selectedReason,
+          scheduled_corpus_item_id,
+          section_position,
+          section,
+          title,
+          topic,
+          url
+        }
+      }));
+    } else if (card_type === "spoc") {
+      // Retrieve placement_id by comparing spocData with the ad that was reported
+      const getPlacementId = () => {
+        if (!spocData || !report.url) {
+          return null;
+        }
+        for (const [placementId, spocList] of Object.entries(spocData)) {
+          for (const spoc of Object.values(spocList)) {
+            if (spoc?.url === report.url) {
+              return placementId;
+            }
+          }
+        }
+        return null;
+      };
+      const placement_id = getPlacementId();
+      dispatch(actionCreators.AlsoToMain({
+        type: actionTypes.REPORT_AD_SUBMIT,
+        data: {
+          report_reason: selectedReason,
+          placement_id,
+          position,
+          reporting_url,
+          url
+        }
+      }));
+    }
+    dispatch(actionCreators.AlsoToMain({
+      type: actionTypes.BLOCK_URL,
+      data: [{
+        ...report
+      }]
+    }));
+    dispatch(actionCreators.OnlyToOneContent({
+      type: actionTypes.SHOW_TOAST_MESSAGE,
+      data: {
+        toastId: "reportSuccessToast",
+        showNotifications: true
+      }
+    }, "ActivityStream:Content"));
+  }' classname="submit-report-btn" data-l10n-attrs="label,tooltiptext" size="default" iconposition="start" menuid="" slot="primary">Submit</moz-button><moz-button data-l10n-id="newtab-report-cancel" onclick="() => {
+    dispatch(actionCreators.AlsoToMain({
+      type: actionTypes.REPORT_CLOSE
+    }));
+  }" classname="cancel-report-btn" data-l10n-attrs="label,tooltiptext" type="default" size="default" iconposition="start" menuid="" disabled="">Cancel</moz-button></moz-button-group></form></dialog><div class="discovery-stream ds-layout ds-layout-topsites"><div class="ds-column ds-column-12"><div class="ds-column-grid"><div><div class="ds-top-sites"><section class="collapsible-section top-sites" data-section-id="topsites"><div class="section-top-bar"><h2 class="section-title-container " style="visibility: hidden;"><span class="section-title"><span data-l10n-id="newtab-section-header-topsites">Top Sites</span></span></h2></div><div><div class="top-sites-list-wrapper"><ul role="group" aria-label="Shortcuts" class="top-sites-list"><li class="top-site-outer"><div class="top-site-inner"><a class="top-site-button" href="https://www.wikipedia.org/" tabindex="0" draggable="true" data-is-sponsored-link="false" aria-label="Wikipedia" title="Wikipedia" data-l10n-args="{&quot;title&quot;:&quot;Wikipedia&quot;}"><div class="tile" aria-hidden="true"><div class="icon-wrapper" data-fallback="W"><div class="top-site-icon rich-icon" style="background-image: url(&quot;chrome://activity-stream/content/data/content/tippytop/images/wikipedia-org@2x.png&quot;);"></div></div></div><div class="title"><span class="title-label" dir="auto">Wikipedia</span><span class="sponsored-label" data-l10n-id="newtab-topsite-sponsored">Sponsored</span></div></a><div><button aria-haspopup="true" data-l10n-id="newtab-menu-content-tooltip" data-l10n-args="{&quot;title&quot;:&quot;Wikipedia&quot;}" class="context-menu-button icon" tabindex="0" title="Open menu" aria-label="Open context menu for Wikipedia"></button></div><div class="topsite-impression-observer"></div></div></li><li class="top-site-outer"><div class="top-site-inner"><a class="top-site-button" href="https://www.youtube.com/" tabindex="-1" draggable="true" data-is-sponsored-link="false" aria-label="YouTube" title="YouTube" data-l10n-args="{&quot;title&quot;:&quot;YouTube&quot;}"><div class="tile" aria-hidden="true"><div class="icon-wrapper" data-fallback="Y"><div class="top-site-icon rich-icon" style="background-image: url(&quot;chrome://activity-stream/content/data/content/tippytop/images/youtube-com@2x.png&quot;);"></div></div></div><div class="title"><span class="title-label" dir="auto">YouTube</span><span class="sponsored-label" data-l10n-id="newtab-topsite-sponsored">Sponsored</span></div></a><div><button aria-haspopup="true" data-l10n-id="newtab-menu-content-tooltip" data-l10n-args="{&quot;title&quot;:&quot;YouTube&quot;}" class="context-menu-button icon" tabindex="-1" title="Open menu" aria-label="Open context menu for YouTube"></button></div><div class="topsite-impression-observer"></div></div></li><li class="top-site-outer"><div class="top-site-inner"><a class="top-site-button" href="https://www.reddit.com/" tabindex="-1" draggable="true" data-is-sponsored-link="false" aria-label="Reddit" title="Reddit" data-l10n-args="{&quot;title&quot;:&quot;Reddit&quot;}"><div class="tile" aria-hidden="true"><div class="icon-wrapper" data-fallback="R"><div class="top-site-icon rich-icon" style="background-image: url(&quot;chrome://activity-stream/content/data/content/tippytop/images/reddit-com@2x.png&quot;);"></div></div></div><div class="title"><span class="title-label" dir="auto">Reddit</span><span class="sponsored-label" data-l10n-id="newtab-topsite-sponsored">Sponsored</span></div></a><div><button aria-haspopup="true" data-l10n-id="newtab-menu-content-tooltip" data-l10n-args="{&quot;title&quot;:&quot;Reddit&quot;}" class="context-menu-button icon" tabindex="-1" title="Open menu" aria-label="Open context menu for Reddit"></button></div><div class="topsite-impression-observer"></div></div></li><li class="top-site-outer"><div class="top-site-inner"><a class="top-site-button" href="https://addons.mozilla.org/" tabindex="-1" draggable="true" data-is-sponsored-link="false" aria-label="Add-ons for Firefox" title="Add-ons for Firefox" data-l10n-args="{&quot;title&quot;:&quot;Add-ons for Firefox&quot;}"><div class="tile" aria-hidden="true"><div class="icon-wrapper" data-fallback="A"><div class="top-site-icon rich-icon" style="background-image: url(&quot;chrome://activity-stream/content/data/content/tippytop/images/addons-mozilla@2x.png&quot;);"></div></div></div><div class="title"><span class="title-label" dir="auto">Add-ons for Firefox</span><span class="sponsored-label" data-l10n-id="newtab-topsite-sponsored">Sponsored</span></div></a><div><button aria-haspopup="true" data-l10n-id="newtab-menu-content-tooltip" data-l10n-args="{&quot;title&quot;:&quot;Add-ons for Firefox&quot;}" class="context-menu-button icon" tabindex="-1" title="Open menu" aria-label="Open context menu for Add-ons for Firefox"></button></div><div class="topsite-impression-observer"></div></div></li><li class="top-site-outer add-button "><div class="top-site-inner"><a class="top-site-button" tabindex="-1" draggable="true" data-is-sponsored-link="false" aria-label="Add Shortcut" data-l10n-id="newtab-topsites-add-shortcut-title" data-l10n-args="{&quot;title&quot;:&quot;&quot;}" title="Add Shortcut"><div class="tile" aria-hidden="true"><div class="icon-wrapper"><div class=""></div></div></div><div class="title"><span class="title-label" dir="auto" data-l10n-id="newtab-topsites-add-shortcut-label">Add Shortcut</span><span class="sponsored-label" data-l10n-id="newtab-topsite-sponsored">Sponsored</span></div></a><div class="topsite-impression-observer"></div></div></li></ul></div><div class="edit-topsites-wrapper"></div></div></section></div></div></div></div><style data-styles="[[null]]"></style></div><div class="discovery-stream ds-layout "><div class="ds-column ds-column-12"><div class="ds-column-grid"><div></div></div></div><style data-styles="[[null]]"></style></div></div></main><aside></aside></div></div></div>
+    <div id="footer-asrouter-container" role="presentation"></div>
+    <script src="FireFox_files/activity-stream-noscripts.html"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-toggle.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-badge.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-button.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-button-group.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-box-button.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-message-bar.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-radio-group.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-select.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/moz-reorderable-list.mjs"></script>
+    <script async="" type="module" src="chrome://global/content/elements/panel-list.js"></script>
+  
+
+</body></html>

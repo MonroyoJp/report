@@ -2,202 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Browser Popups</title>
+  <title>OBJ + MTL Loader (Old GPU Friendly)</title>
   <style>
-    body {
-      background: #111;
-      color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      user-select: none;
-    }
-    h2 { margin: 20px 0; cursor: pointer; }
-
-    .popup {
-      position: absolute;
-      background: #fff;
-      color: #000;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      overflow: hidden;
-      opacity: 0;
-      transform: scale(0.2);
-      border: 1px solid #ccc;
-      display: flex;
-      flex-direction: column;
-    }
-    .popup-header {
-      display: flex;
-      align-items: center;
-      padding: 6px 10px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: move;
-      user-select: none;
-    }
-    .popup-header .title {
-      margin-left: 10px;
-    }
-    .popup-header .close-btn {
-      margin-left: auto;
-      cursor: pointer;
-      padding: 0 6px;
-    }
-    .popup-iframe {
-      flex: 1;
-      border: none;
-      background: #fff;
-    }
-
-    /* Browser-specific colors */
-    .chrome   { background:#e0e0e0; color:#222; }
-    .firefox  { background:#ff7139; color:#fff; }
-    .safari   { background:#3a86ff; color:#fff; }
-    .edge     { background:#0078d7; color:#fff; }
-    .ie       { background:#1ebbee; color:#fff; }
-
-    /* Fake traffic light buttons for Safari */
-    .traffic-lights {
-      display: flex;
-      gap: 6px;
-    }
-    .traffic-lights span {
-      display: inline-block;
-      width: 12px; height: 12px;
-      border-radius: 50%;
-    }
-    .red { background:#ff5f57; }
-    .yellow { background:#ffbd2e; }
-    .green { background:#28c940; }
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
   </style>
 </head>
 <body>
-  <h2 id="trigger">Click me to spawn browser popups</h2>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.129.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/loaders/MTLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/loaders/OBJLoader.js"></script>
 
-  <template id="popupTemplate">
-    <div class="popup">
-      <div class="popup-header">
-        <div class="traffic-lights" style="display:none;">
-          <span class="red"></span><span class="yellow"></span><span class="green"></span>
-        </div>
-        <span class="title"></span>
-        <div class="close-btn">✖</div>
-      </div>
-      <iframe class="popup-iframe"></iframe>
-    </div>
-  </template>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script>
-    const trigger = document.getElementById("trigger");
-    let isOpen = false;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
-    // browser configs (using proxy!)
-    const browsers = [
-      { x:50,  y:150, w:500, h:350, browser:"chrome",  title:"Chrome - Google",    url:"/proxy?url=https://www.google.com" },
-      { x:600, y:120, w:500, h:350, browser:"firefox", title:"Firefox - Wikipedia",url:"/proxy?url=https://wikipedia.org" },
-      { x:300, y:480, w:500, h:350, browser:"safari",  title:"Safari - Archive",   url:"/proxy?url=https://archive.org" },
-      { x:150, y:300, w:500, h:350, browser:"edge",    title:"Edge - DuckDuckGo",  url:"/proxy?url=https://duckduckgo.com" },
-      { x:700, y:400, w:500, h:350, browser:"ie",      title:"Internet Explorer - Bing", url:"/proxy?url=https://www.bing.com" }
-    ];
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-    trigger.addEventListener("click", () => {
-      if (!isOpen) {
-        browsers.forEach((cfg, i) => spawnPopup(cfg, i));
-        isOpen = true;
-      } else {
-        closeAllPopups();
-        isOpen = false;
-      }
-    });
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 10, 7.5).normalize();
+    scene.add(light);
 
-    function spawnPopup({x,y,w,h,title,url,browser}, delayIndex) {
-      const tmpl = document.getElementById("popupTemplate");
-      const popup = tmpl.content.firstElementChild.cloneNode(true);
+    const mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load('pc_system_unit_3d.mtl', (materials) => {
+  materials.preload();
+  const objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials(materials);
+  objLoader.load('pc_system_unit_3d.obj', (object) => {
+    scene.add(object);
+    object.position.y = -1; // lift it up a little
+  });
+});
 
-      const header = popup.querySelector(".popup-header");
-      header.classList.add(browser);
-      popup.querySelector(".title").textContent = title;
 
-      // Safari gets traffic lights
-      if (browser === "safari") {
-        header.querySelector(".traffic-lights").style.display = "flex";
-      }
+    camera.position.z = 5;
 
-      popup.querySelector("iframe").src = url;
-      document.body.appendChild(popup);
-
-      const centerX = window.innerWidth/2 - w/2;
-      const centerY = window.innerHeight/2 - h/2;
-      popup.style.left = centerX+"px";
-      popup.style.top = centerY+"px";
-      popup.style.width = w+"px";
-      popup.style.height = h+"px";
-
-      anime({
-        targets: popup,
-        left: x+"px",
-        top: y+"px",
-        opacity: 1,
-        scale: 1,
-        easing: "easeOutBack",
-        duration: 800,
-        delay: delayIndex * 150
-      });
-
-      makeDraggable(popup);
-      popup.querySelector(".close-btn").onclick = () => closePopup(popup, w, h);
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
     }
-
-    function closePopup(popup, w, h) {
-      const centerX = window.innerWidth/2 - w/2;
-      const centerY = window.innerHeight/2 - h/2;
-      anime({
-        targets: popup,
-        left: centerX+"px",
-        top: centerY+"px",
-        opacity: 0,
-        scale: 0.2,
-        easing: "easeInBack",
-        duration: 500,
-        complete: () => popup.remove()
-      });
-    }
-
-    function closeAllPopups() {
-      document.querySelectorAll(".popup").forEach(p => {
-        const rect = p.getBoundingClientRect();
-        closePopup(p, rect.width, rect.height);
-      });
-    }
-
-    function makeDraggable(popup) {
-      const header = popup.querySelector(".popup-header");
-      let offsetX = 0, offsetY = 0, startX, startY, dragging = false;
-
-      header.addEventListener("mousedown", (e) => {
-        dragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        const rect = popup.getBoundingClientRect();
-        offsetX = startX - rect.left;
-        offsetY = startY - rect.top;
-        document.addEventListener("mousemove", move);
-        document.addEventListener("mouseup", stop);
-      });
-
-      function move(e) {
-        if (!dragging) return;
-        popup.style.left = (e.clientX - offsetX) + "px";
-        popup.style.top  = (e.clientY - offsetY) + "px";
-      }
-
-      function stop() {
-        dragging = false;
-        document.removeEventListener("mousemove", move);
-        document.removeEventListener("mouseup", stop);
-      }
-    }
+    animate();
   </script>
 </body>
 </html>
